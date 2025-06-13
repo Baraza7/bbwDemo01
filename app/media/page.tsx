@@ -1,0 +1,350 @@
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowRight, Calendar, Clock, Download, ExternalLink, Search, User } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import Header from "@/components/header"
+import Footer from "@/components/footer"
+import { ResponsiveContainer } from "@/components/responsive-container"
+import { InfoCard } from "@/components/InfoCard"
+import { FileText, Megaphone } from "lucide-react"
+import { BlogCard } from "@/components/BlogCard"
+import SharedPageSections from "@/components/SharedPageSections"
+import BentoGridGallery from "@/components/BentoGridGallery"
+import InnerHero from "@/components/InnerHero"
+
+const posts = [
+  {
+    image: "/trade-finance-kenya.png",
+    category: "Trade Finance",
+    title: "Understanding Trade Finance in Kenya",
+    excerpt: "Learn about the current state of trade finance in Kenya and how businesses can leverage financial instruments for growth.",
+    author: "Arnold Ngusale",
+    date: "May 15, 2024",
+    slug: "understanding-trade-finance",
+  },
+  {
+    image: "/banking-regulations-africa.png",
+    category: "Industry News",
+    title: "The Impact of New Banking Regulations",
+    excerpt: "Explore how recent changes in banking regulations are affecting trade finance and what it means for your business.",
+    author: "Susan Awuor",
+    date: "April 28, 2024",
+    slug: "banking-regulations-impact",
+  },
+  {
+    image: "/investment-returns.png",
+    category: "Investment",
+    title: "Maximizing Investment Returns in Uncertain Times",
+    excerpt: "Strategies for optimizing your investment portfolio during economic uncertainty and market volatility.",
+    author: "Nelly Yano",
+    date: "April 10, 2024",
+    slug: "maximizing-investment-returns",
+  },
+];
+
+// Duplicate the posts to create a 3x2 grid
+const allPosts = [...posts, ...posts];
+
+export default function MediaPage() {
+  return (
+    <div className="min-h-screen bg-white text-gray-800">
+      <Header />
+
+      {/* Hero Section */}
+      <InnerHero>
+        <h1 className="hero-title text-white">
+            Stay Informed
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#FFBE00] to-[#00B1D2]">
+                & Engaged
+            </span>
+        </h1>
+        <div className="mt-4 text-center">
+            <span className="inline-block px-8 py-2 text-lg font-bold text-black bg-yellow-400">
+                PLACEHOLDER003
+            </span>
+        </div>
+      </InnerHero>
+
+      {/* Info Cards Section - Overlapping Design */}
+      <section className="relative -mt-24 pb-20">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-0 max-w-5xl mx-auto">
+            <InfoCard icon={<FileText className="h-8 w-8 text-white" />} title="Latest Article">
+              <p className="text-sm">Understanding Trade Finance in Kenya</p>
+            </InfoCard>
+            <InfoCard icon={<Calendar className="h-8 w-8 text-white" />} title="Upcoming Event">
+                <p className="text-sm">Webinar: Navigating Market Volatility</p>
+            </InfoCard>
+            <InfoCard icon={<Megaphone className="h-8 w-8 text-white" />} title="Recent News">
+                <p className="text-sm">Black Bow Partners with FinTech Innovators</p>
+            </InfoCard>
+          </div>
+        </div>
+      </section>
+
+      {/* Introductory Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--accent-yellow)' }}>
+              Insights & Updates from Black Bow
+            </h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              Welcome to our media hub. Here, you'll find the latest news, in-depth articles, and expert analysis on the financial landscape. We are committed to providing valuable insights that help you stay ahead in the dynamic world of trade, finance, and investment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Grid Section */}
+      <section className="py-20 bg-gray-950 text-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Latest Articles
+            </h2>
+            <p className="text-xl text-white/70 leading-relaxed">
+              Dive into our collection of articles for expert analysis, industry trends, and valuable insights that can help inform your financial strategies and business decisions.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allPosts.map((post, index) => (
+                <BlogCard key={index} {...post} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Media Gallery Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--accent-yellow)' }}>
+              Our Media Gallery
+            </h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              Explore moments from our events, workshops, and company milestones. This gallery captures the vibrant spirit and professional dedication of the Black Bow team.
+            </p>
+          </div>
+          <BentoGridGallery />
+        </div>
+      </section>
+
+      <SharedPageSections />
+      <Footer />
+    </div>
+  )
+}
+
+// Component for News Card
+function NewsCard({ title, date, excerpt, slug }: { title: string; date: string; excerpt: string; slug: string }) {
+  return (
+    <Card className="p-4 xs:p-5 hover:shadow-md transition-shadow">
+      <div className="flex items-center text-xs xs:text-sm text-gray-500 mb-2">
+        <Calendar className="h-3 w-3 xs:h-4 xs:w-4 mr-1" />
+        <span className="font-body">{date}</span>
+      </div>
+      <h3 className="font-sans text-base xs:text-lg font-bold mb-2 text-[#27272A]">{title}</h3>
+      <p className="font-body text-gray-600 text-xs xs:text-sm mb-3">{excerpt}</p>
+      <Link
+        href={`/media/news/${slug}`}
+        className="font-sans text-[#00B1D2] text-xs xs:text-sm font-medium hover:underline"
+      >
+        Read more <ArrowRight className="inline h-2 w-2 xs:h-3 xs:w-3 ml-1" />
+      </Link>
+    </Card>
+  )
+}
+
+// Component for Gallery Item
+function GalleryItem({ image, title, type }: { image: string; title: string; type: "photo" | "video" }) {
+  return (
+    <div className="group relative overflow-hidden rounded-lg cursor-pointer">
+      <div className="aspect-square relative">
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover transition-transform group-hover:scale-110"
+          sizes="(max-width: 768px) 50vw, 25vw"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <div className="text-white text-center p-3 xs:p-4">
+            <div className="mb-1 xs:mb-2">
+              {type === "photo" ? (
+                <Search className="h-6 w-6 xs:h-8 xs:w-8 mx-auto" />
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-6 w-6 xs:h-8 xs:w-8 mx-auto"
+                >
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              )}
+            </div>
+            <h4 className="font-sans font-medium text-xs xs:text-sm">{title}</h4>
+            <p className="text-[10px] xs:text-xs mt-1 font-body">{type === "photo" ? "View Photo" : "Watch Video"}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Component for Press Release Item
+function PressReleaseItem({
+  title,
+  date,
+  excerpt,
+  slug,
+}: {
+  title: string
+  date: string
+  excerpt: string
+  slug: string
+}) {
+  return (
+    <div className="bg-white p-4 xs:p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+      <div className="flex items-center text-xs xs:text-sm text-gray-500 mb-2 xs:mb-3">
+        <Calendar className="h-3 w-3 xs:h-4 xs:w-4 mr-1" />
+        <span className="font-body">{date}</span>
+      </div>
+      <h3 className="font-sans text-lg xs:text-xl font-bold mb-2 xs:mb-3 text-[#27272A]">{title}</h3>
+      <p className="font-body text-gray-600 mb-3 xs:mb-4 text-xs xs:text-sm">{excerpt}</p>
+      <div className="flex justify-between items-center">
+        <Link href={`/media/press-releases/${slug}`}>
+          <Button
+            variant="outline"
+            style={{ borderColor: "#D01C1F", color: "#D01C1F" }}
+            className="hover:bg-[#D01C1F] hover:text-white text-xs xs:text-sm"
+          >
+            Read Full Release <ArrowRight className="ml-2 h-3 w-3 xs:h-4 xs:w-4" />
+          </Button>
+        </Link>
+        <a
+          href="#"
+          className="text-gray-500 hover:text-[#00B1D2] transition-colors flex items-center font-sans text-xs xs:text-sm"
+        >
+          <ExternalLink className="h-3 w-3 xs:h-4 xs:w-4 mr-1" /> PDF
+        </a>
+      </div>
+    </div>
+  )
+}
+
+// Component for Resource Card
+function ResourceCard({
+  title,
+  description,
+  type,
+  size,
+}: {
+  title: string
+  description: string
+  type: string
+  size: string
+}) {
+  return (
+    <Card className="p-4 xs:p-6 hover:shadow-lg transition-shadow h-full flex flex-col">
+      <div className="mb-3 xs:mb-4 p-2 xs:p-3 bg-gray-100 rounded-lg inline-block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-5 w-5 xs:h-6 xs:w-6 text-[#00B1D2]"
+        >
+          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+          <polyline points="14 2 14 8 20 8" />
+        </svg>
+      </div>
+      <h3 className="font-sans text-lg xs:text-xl font-bold mb-2 text-[#27272A]">{title}</h3>
+      <p className="font-body text-gray-600 mb-3 xs:mb-4 flex-grow text-xs xs:text-sm">{description}</p>
+      <div className="flex items-center justify-between">
+        <span className="font-body text-xs xs:text-sm bg-gray-100 px-2 py-1 rounded text-gray-600">
+          {type} • {size}
+        </span>
+        <Button
+          variant="outline"
+          style={{ borderColor: "#00B1D2", color: "#00B1D2" }}
+          className="hover:bg-[#00B1D2] hover:text-white text-xs xs:text-sm"
+        >
+          <Download className="mr-2 h-3 w-3 xs:h-4 xs:w-4" /> Download
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
+// Component for Event Card
+function EventCard({
+  title,
+  date,
+  location,
+  description,
+}: {
+  title: string
+  date: string
+  location: string
+  description: string
+}) {
+  return (
+    <Card className="p-4 xs:p-6 hover:shadow-lg transition-shadow">
+      <div className="flex flex-col md:flex-row gap-3 xs:gap-4">
+        <div className="md:w-20 xs:md:w-24 flex-shrink-0 bg-[#FFBE00] text-[#27272A] rounded-lg p-2 xs:p-3 text-center">
+          <div className="font-body text-xs xs:text-sm font-medium">{date.split(" ")[0]}</div>
+          <div className="font-sans text-xl xs:text-2xl font-bold">{date.split(" ")[1].replace(",", "")}</div>
+        </div>
+        <div>
+          <h3 className="font-sans text-lg xs:text-xl font-bold mb-2 text-[#27272A]">{title}</h3>
+          <div className="flex items-center font-body text-gray-600 mb-1 xs:mb-2 text-xs xs:text-sm">
+            <Calendar className="h-3 w-3 xs:h-4 xs:w-4 mr-2" />
+            <span>{date}</span>
+          </div>
+          <div className="flex items-center font-body text-gray-600 mb-2 xs:mb-3 text-xs xs:text-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-3 w-3 xs:h-4 xs:w-4 mr-2"
+            >
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <span>{location}</span>
+          </div>
+          <p className="font-body text-gray-600 mb-3 xs:mb-4 text-xs xs:text-sm">{description}</p>
+          <Button
+            variant="outline"
+            style={{ borderColor: "#D01C1F", color: "#D01C1F" }}
+            className="hover:bg-[#D01C1F] hover:text-white text-xs xs:text-sm"
+          >
+            Register Now
+          </Button>
+        </div>
+      </div>
+    </Card>
+  )
+}

@@ -1,0 +1,93 @@
+.ekit-wid-con .elementskit-image-accordion-wraper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  min-height: 366px;
+  position: relative;
+}
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion::before {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: -webkit-gradient(linear,left bottom,left top,from(black),color-stop(60%,rgba(255,255,255,0)));
+  background: linear-gradient(0deg,#000 0,rgba(255,255,255,0) 60%);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  opacity: 0;
+}
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion .elementskit-accordion-content {
+  width: 100%;
+  align-self: flex-end; /* Align content to the bottom */
+  padding: 20px;
+}
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion .elementskit-accordion-title {
+  color: #fff;
+  margin-bottom: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion .elementskit-accordion-title-wraper,
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion .elementskit-btn-wraper {
+  position: relative;
+  -webkit-transition: all .6s ease;
+  transition: all .6s ease;
+  top: 100px; /* Start off-screen */
+  opacity: 0;
+  visibility: hidden;
+  display: block;
+}
+.ekit-wid-con .elementskit-btn-wraper {
+  margin-top: 10px;
+}
+
+.ekit-wid-con .ekit-image-accordion--btn {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+/* --- [KEY MODIFICATION: Changed :checked to .active] --- */
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion.active,
+.ekit-image-accordion-hover .ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion:hover {
+  -webkit-box-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+}
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion.active::before,
+.ekit-image-accordion-hover .ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion:hover::before {
+  top: 0;
+  opacity: 1;
+}
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion.active .elementskit-accordion-title-wraper,
+.ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion.active .elementskit-btn-wraper,
+.ekit-image-accordion-hover .ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion:hover .elementskit-accordion-title-wraper,
+.ekit-image-accordion-hover .ekit-wid-con .elementskit-image-accordion-wraper .elementskit-single-image-accordion:hover .elementskit-btn-wraper {
+  top: 0;
+  opacity: 1;
+  visibility: visible;
+} 

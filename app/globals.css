@@ -1,0 +1,710 @@
+/* Remove the problematic Google Fonts import */
+/* Fonts are now loaded via Next.js font optimization in layout.tsx */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    /* Brand Colors */
+    --accent-yellow: #ffbe00;
+    --dark-gray: #27272a;
+    --light-gray: #6b7280;
+    --blue-accent: #00b1d2;
+
+    /* Responsive Font Sizes - CSS Custom Properties for Dynamic Scaling */
+    --hero-title-size: clamp(24px, 5vw, 48px);
+    --hero-title-size-mobile: clamp(20px, 6vw, 32px);
+    --section-heading-size: clamp(28px, 4vw, 42px);
+    --subsection-heading-size: clamp(16px, 2.5vw, 24px);
+    --logo-text-size: clamp(18px, 3vw, 36px);
+    --hero-subtitle-size: clamp(11px, 2vw, 18px);
+    --service-card-title-size: clamp(16px, 2vw, 22px);
+    --button-text-size: clamp(14px, 1.8vw, 18px);
+    --body-text-size: clamp(14px, 1.6vw, 18px);
+    --small-text-size: clamp(12px, 1.4vw, 16px);
+    --ceo-quote-size: clamp(18px, 3vw, 28px);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), "Inter", sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+}
+
+/* Font Family Definitions using CSS variables set by Next.js fonts */
+.font-serif {
+  font-family: var(--font-italiana), "Italiana", serif;
+  letter-spacing: 0.05em;
+}
+
+.font-sans {
+  font-family: var(--font-roboto), "Roboto", sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-inter), "Inter", sans-serif;
+}
+
+/* Italiana (Serif Headings) - Dynamic Responsive Sizing */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-italiana), "Italiana", serif !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Main Hero Title - Fully Responsive with Fluid Scaling */
+.hero-title {
+  font-family: var(--font-italiana), "Italiana", serif !important;
+  font-size: var(--hero-title-size) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1.2 !important;
+  text-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Mobile-specific hero title sizing */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: var(--hero-title-size-mobile) !important;
+  }
+}
+
+/* Section Headings - Fluid Responsive Scaling */
+.section-heading {
+  font-family: var(--font-italiana), "Italiana", serif !important;
+  font-size: var(--section-heading-size) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  color: var(--dark-gray);
+  margin-bottom: 1rem;
+}
+
+/* Subsection Headings - Responsive Scaling */
+.subsection-heading {
+  font-family: var(--font-italiana), "Italiana", serif !important;
+  font-size: var(--subsection-heading-size) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  color: var(--dark-gray);
+  margin-bottom: 1rem;
+}
+
+/* CEO Quote - Responsive Typography */
+.ceo-quote {
+  font-family: var(--font-italiana), "Italiana", serif !important;
+  font-size: var(--ceo-quote-size) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  color: var(--dark-gray);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Brand Logo Text - Dynamic Responsive Sizing */
+.brand-logo-text {
+  font-family: var(--font-italiana), "Italiana", serif !important;
+  font-size: var(--logo-text-size) !important;
+  font-weight: 700 !important;
+  color: var(--accent-yellow);
+  letter-spacing: 0.05em !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Roboto (Sans-Serif UI) - Responsive Scaling */
+.hero-subtitle {
+  font-family: var(--font-roboto), "Roboto", sans-serif !important;
+  font-size: var(--hero-subtitle-size) !important;
+  font-weight: normal;
+  color: white;
+  text-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.service-card-title {
+  font-family: var(--font-roboto), "Roboto", sans-serif !important;
+  font-size: var(--service-card-title-size) !important;
+  font-weight: 700 !important;
+  color: var(--dark-gray);
+  margin-bottom: 0.5rem;
+}
+
+.button-text {
+  font-family: var(--font-roboto), "Roboto", sans-serif !important;
+  font-size: var(--button-text-size) !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease;
+}
+
+.bottom-section-link {
+  font-family: var(--font-roboto), "Roboto", sans-serif !important;
+  font-size: var(--button-text-size) !important;
+  font-weight: 500 !important;
+  color: var(--accent-yellow);
+}
+
+.bottom-section-link:hover {
+  text-decoration: underline;
+}
+
+/* Inter (Body Text) - Responsive Typography */
+.hero-description {
+  font-family: var(--font-inter), "Inter", sans-serif !important;
+  font-size: var(--body-text-size) !important;
+  font-weight: 400 !important;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+.section-description {
+  font-family: var(--font-inter), "Inter", sans-serif !important;
+  font-size: var(--body-text-size) !important;
+  font-weight: 400 !important;
+  color: var(--light-gray);
+  line-height: 1.6;
+}
+
+.team-member-bio {
+  font-family: var(--font-inter), "Inter", sans-serif !important;
+  font-size: var(--small-text-size) !important;
+  font-weight: 400 !important;
+  color: var(--light-gray);
+}
+
+.contact-info {
+  font-family: var(--font-inter), "Inter", sans-serif !important;
+  font-size: var(--small-text-size) !important;
+  font-weight: 400 !important;
+  color: var(--light-gray);
+  line-height: 1.6;
+}
+
+/* Additional Responsive Breakpoints for Fine-Tuning */
+@media (max-width: 320px) {
+  :root {
+    --hero-title-size-mobile: clamp(18px, 7vw, 24px);
+    --section-heading-size: clamp(22px, 5vw, 28px);
+    --logo-text-size: clamp(16px, 4vw, 20px);
+  }
+}
+
+@media (min-width: 321px) and (max-width: 480px) {
+  :root {
+    --hero-title-size-mobile: clamp(20px, 6vw, 28px);
+    --section-heading-size: clamp(24px, 4.5vw, 32px);
+    --logo-text-size: clamp(18px, 3.5vw, 24px);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  :root {
+    --hero-title-size: clamp(28px, 5vw, 36px);
+    --section-heading-size: clamp(30px, 4vw, 38px);
+    --logo-text-size: clamp(20px, 3vw, 28px);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --hero-title-size: clamp(32px, 4.5vw, 42px);
+    --section-heading-size: clamp(34px, 3.8vw, 40px);
+    --logo-text-size: clamp(24px, 2.8vw, 32px);
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  :root {
+    --hero-title-size: clamp(36px, 4vw, 44px);
+    --section-heading-size: clamp(36px, 3.5vw, 42px);
+    --logo-text-size: clamp(26px, 2.5vw, 34px);
+  }
+}
+
+@media (min-width: 1441px) {
+  :root {
+    --hero-title-size: clamp(40px, 3.5vw, 48px);
+    --section-heading-size: clamp(38px, 3vw, 44px);
+    --logo-text-size: clamp(28px, 2.2vw, 36px);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-yellow);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d01c1f;
+}
+
+/* Utility classes for responsive design */
+.responsive-container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 480px) {
+  .responsive-container {
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    max-width: 768px;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 834px) {
+  .responsive-container {
+    max-width: 834px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    max-width: 1024px;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .responsive-container {
+    max-width: 1440px;
+  }
+}
+
+/* Animation keyframes */
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blinkCursor {
+  from {
+    border-right-color: rgba(255, 255, 255, 0.75);
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
+
+/* Enhanced theme transition styles */
+* {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+/* Smooth theme transitions for all elements */
+.theme-transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure proper font loading and fallbacks */
+@font-face {
+  font-family: "Italiana-fallback";
+  src: local("Times New Roman"), local("serif");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto-fallback";
+  src: local("Arial"), local("Helvetica"), local("sans-serif");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter-fallback";
+  src: local("Arial"), local("Helvetica"), local("sans-serif");
+  font-display: swap;
+}
+
+/* Performance optimization for font rendering */
+.font-loading {
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Apply font loading optimization to all text elements */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+a,
+button {
+  @apply font-loading;
+}
+
+@layer components {
+  .hero-subtitle {
+    font-size: var(--hero-subtitle-size) !important;
+    font-weight: normal;
+  }
+}
+
+/* Custom responsive container styles */
+.responsive-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 834px;
+}
+
+/* Modern hover animation for the button */
+.modern-hover-button {
+  position: relative;
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modern-hover-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+  z-index: 1;
+}
+
+.modern-hover-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(150, 6, 6, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.modern-hover-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(150, 6, 6, 0.1);
+}
+
+.modern-hover-button:hover::before {
+  opacity: 1;
+}
+
+.modern-hover-button:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.modern-hover-button:hover #button-text,
+.modern-hover-button:hover #about-button-text {
+  color: #960606 !important;
+}
+
+.modern-hover-button:hover #button-icon,
+.modern-hover-button:hover #about-button-icon {
+  color: #960606 !important;
+  transform: translateX(3px);
+}
+
+.modern-hover-button:active {
+  transform: translateY(-1px);
+  transition: transform 0.1s ease-out;
+}
+
+/* Subtle pulse animation on focus */
+.modern-hover-button:focus-visible {
+  animation: subtle-pulse 2s infinite;
+}
+
+@keyframes subtle-pulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(150, 6, 6, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 0 8px rgba(150, 6, 6, 0);
+  }
+}
+
+/* Custom breakpoint for xs (extra small) screens */
+@media (min-width: 475px) {
+  .xs\:py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .xs\:p-12 {
+    padding: 3rem;
+  }
+
+  .xs\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .xs\:text-xl {
+    font-size: calc(1.25rem - 2px);
+    line-height: calc(1.75rem - 2px);
+  }
+
+  .xs\:mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .xs\:mb-8 {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Reset styles to ensure full width */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Service card styles for homepage hero bottom section */
+.hero-service-card {
+  @apply h-full flex flex-col justify-center p-6 text-white transform transition-all duration-300 ease-in-out;
+}
+
+.hero-service-card .hero-service-title {
+  @apply font-serif text-2xl font-bold mb-2 transition-colors duration-300;
+  color: rgb(255, 215, 0); /* Default yellow title */
+}
+
+.hero-service-card .hero-service-description {
+  @apply hero-description text-sm transition-colors duration-300;
+}
+
+.hero-service-card .hero-service-link {
+  @apply bottom-section-link mt-3 text-sm inline-block transition-colors duration-300;
+}
+
+/* Hover states */
+.hero-service-card:hover {
+  @apply bg-white scale-y-105;
+}
+
+.hero-service-card:hover .hero-service-title {
+  color: #B31117; /* Red title on hover */
+}
+
+.hero-service-card:hover .hero-service-description,
+.hero-service-card:hover .hero-service-link {
+  @apply text-black no-underline;
+}
+
+/* Individual default card backgrounds */
+.hero-service-card-bg1 {
+  background-color: #D01C1F;
+}
+
+.hero-service-card-bg2 {
+  background-color: #b31217;
+}
+
+/* Styles for the new Team Section cards */
+.team-card-container {
+  perspective: 1000px;
+  width: 100%; /* Changed from 500px to 100% */
+  aspect-ratio: 1 / 1; /* Added for square responsive cards */
+  /* height: 500px; Removed fixed height */
+}
+
+.team-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.team-card-container:hover .team-card-inner {
+  transform: rotateY(180deg);
+}
+
+.team-card-front,
+.team-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  border-radius: 1rem; /* Optional: for rounded corners like the screenshot */
+  overflow: hidden; /* Ensures content respects border radius */
+}
+
+.team-card-back {
+  background-color: #000000;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex; 
+  flex-direction: column; 
+  padding: 32px; 
+  box-sizing: border-box; /* Ensure padding is included in height calculation for bio-container */
+}
+
+.bio-container {
+  height: 100%; /* Changed from 436px to 100% */
+  overflow-y: auto;
+  font-family: var(--font-montserrat); 
+  font-size: 12px;
+  font-weight: 400; /* Montserrat Regular */
+  line-height: 1.5;
+}
+
+.bio-container::-webkit-scrollbar {
+  width: 3px;
+}
+
+.bio-container::-webkit-scrollbar-track {
+  background: #FFFFFF20; /* 1px effectively due to width, but use color with alpha */
+}
+
+.bio-container::-webkit-scrollbar-thumb {
+  background: #FFD700;
+  border-radius: 3px; /* Optional: for rounded thumb */
+}
+
+/* Responsive grid for the team section */
+.team-section-grid {
+  display: block; /* Changed from grid to block, layout will be handled by component */
+  /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); Removed */
+  /* gap: 32px; Removed */
+  padding: 40px 20%; 
+  /* justify-items: center; Removed */
+  background-color: #000000; /* Added black background */
+  /* background-image: url('/team-background.jpg'); Removed */
+  /* background-size: cover; Removed */
+  /* background-position: center; Removed */
+  /* background-repeat: no-repeat; Removed */
+}
+
+/* Utility for Montserrat font if needed elsewhere, or directly apply var(--font-montserrat) */
+.font-montserrat {
+  font-family: var(--font-montserrat);
+}
