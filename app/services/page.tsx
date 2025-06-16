@@ -14,32 +14,38 @@ const services = [
     {
       icon: <FileText size={40} />,
       title: "Bid Securities",
-      description: "Provides financial assurance to project owners that bidders will honor their obligations, facilitating seamless participation in tenders."
+      description: "Provides financial assurance to project owners that bidders will honor their obligations, facilitating seamless participation in tenders.",
+      href: "/services/bid-securities"
     },
     {
       icon: <Handshake size={40} />,
       title: "Performance Guarantees",
-      description: "A guarantee issued to a procuring entity on behalf of the winning bidder to guarantee successful completion of the awarded project."
+      description: "A guarantee issued to a procuring entity on behalf of the winning bidder to guarantee successful completion of the awarded project.",
+      href: "/services/performance-guarantees"
     },
     {
       icon: <DollarSign size={40} />,
       title: "Advance Payment Guarantees",
-      description: "Issued on behalf of our clients to secure upfront payments for jobs awarded but not yet executed, enabling project mobilization."
+      description: "Issued on behalf of our clients to secure upfront payments for jobs awarded but not yet executed, enabling project mobilization.",
+      href: "/services/advance-payment-guarantees"
     },
     {
       icon: <ShieldCheck size={40} />,
       title: "Contractors' All Risk Insurance",
-      description: "Comprehensive insurance coverage protecting against all risks associated with construction projects and work-related injuries."
+      description: "Comprehensive insurance coverage protecting against all risks associated with construction projects and work-related injuries.",
+      href: "/services/contractors-insurance"
     },
     {
       icon: <Briefcase size={40} />,
       title: "Trade Finance Solutions",
-      description: "Innovative and flexible financing that optimizes cash flow and mitigates risks associated with domestic and international trade."
+      description: "Innovative and flexible financing that optimizes cash flow and mitigates risks associated with domestic and international trade.",
+      href: "/services/trade-finance"
     },
     {
       icon: <Zap size={40} />,
       title: "Investment Advisory",
-      description: "Expert advisory services to help you navigate financial markets and make informed decisions to grow your wealth."
+      description: "Expert advisory services to help you navigate financial markets and make informed decisions to grow your wealth.",
+      href: "/services/investment-advisory"
     }
 ];
 
@@ -105,6 +111,7 @@ export default function ServicesPage() {
                         icon={service.icon}
                         title={service.title}
                         description={service.description}
+                        href={service.href}
                     />
                 </div>
             ))}
