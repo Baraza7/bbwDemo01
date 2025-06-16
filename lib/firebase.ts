@@ -12,7 +12,11 @@ let storage: any = null;
 
 try {
   app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+<<<<<<< Updated upstream
 
+=======
+  
+>>>>>>> Stashed changes
   // Initialize services
   auth = getAuth(app);
   db = getFirestore(app);

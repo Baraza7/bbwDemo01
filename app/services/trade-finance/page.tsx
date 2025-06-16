@@ -51,7 +51,7 @@ export default function TradeFinancePage() {
               </h2>
               <p className="font-body text-gray-700 mb-6 text-lg leading-relaxed">
                 Trade finance represents the financial instruments and products that are used by companies to facilitate
-                international trade and commerce. At Black Bow Consult, we provide comprehensive trade finance solutions
+                international trade and commerce. At Blackbow Consult, we provide comprehensive trade finance solutions
                 including bid securities, performance guarantees, advance payment guarantees, and bank guarantees to
                 support your business operations.
               </p>
@@ -214,7 +214,7 @@ export default function TradeFinancePage() {
                   financial guarantee required for the bid.
                 </p>
                 <p className="font-body text-gray-700 mb-4">
-                  <span className="font-bold">Solution:</span> Black Bow Consult facilitated a bid bond through our
+                  <span className="font-bold">Solution:</span> Blackbow Consult facilitated a bid bond through our
                   banking partners, enabling the company to submit a compliant bid.
                 </p>
                 <p className="font-body text-gray-700 mb-4">
@@ -280,7 +280,7 @@ export default function TradeFinancePage() {
             </p>
           </blockquote>
           <p className="mt-8 text-gray-700 max-w-2xl mx-auto font-body text-lg">
-            At Black Bow Consult, we pride ourselves on being that trustworthy partner, guiding you through the
+            At Blackbow Consult, we pride ourselves on being that trustworthy partner, guiding you through the
             complexities of trade finance to ensure your business success.
           </p>
         </div>

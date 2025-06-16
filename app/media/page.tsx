@@ -41,7 +41,7 @@ export default function MediaPage() {
                 <p className="text-sm">Webinar: Navigating Market Volatility</p>
             </InfoCard>
             <InfoCard icon={<Megaphone className="h-8 w-8 text-white" />} title="Recent News">
-                <p className="text-sm">Black Bow Partners with FinTech Innovators</p>
+                <p className="text-sm">Blackbow Partners with FinTech Innovators</p>
             </InfoCard>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function MediaPage() {
               Our Media Gallery
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Explore moments from our events, workshops, and company milestones. This gallery captures the vibrant spirit and professional dedication of the Black Bow team.
+              Explore moments from our events, workshops, and company milestones. This gallery captures the vibrant spirit and professional dedication of the Blackbow team.
             </p>
           </div>
           <BentoGridGallery />

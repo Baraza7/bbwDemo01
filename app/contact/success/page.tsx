@@ -21,7 +21,7 @@ export default function ContactSuccessPage() {
               Message Sent Successfully!
             </h1>
             <p className="font-body text-gray-600 mb-8 text-lg">
-              Thank you for contacting Black Bow Consult. We have received your message and will get back to you as soon
+              Thank you for contacting Blackbow Consult. We have received your message and will get back to you as soon
               as possible.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

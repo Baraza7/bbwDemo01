@@ -57,11 +57,11 @@ export default function AboutPage() {
               <div className="space-y-6">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--accent-yellow)' }}>Our Story</h2>
                 <p className="text-xl text-gray-600 leading-relaxed mb-6">
-                  Founded in 2014, Black Bow Consult has grown from a vision to become Africa's trusted partner in financial
+                  Founded in 2014, Blackbow Consult has grown from a vision to become Africa's trusted partner in financial
                   solutions, empowering businesses across multiple sectors.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Black Bow Consult Co. Ltd. empowers African businesses by providing financial solutions that unlock
+                  Blackbow Consult Co. Ltd. empowers African businesses by providing financial solutions that unlock
                   growth and success. We provide trade finance, insurance, and investment advisory services across
                   multiple sectors including transport, manufacturing, real estate, aviation, ICT, education, and
                   agribusiness.

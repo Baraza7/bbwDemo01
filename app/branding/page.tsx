@@ -56,7 +56,7 @@ export default function BrandingPage() {
     <!DOCTYPE html>
     <html>
     <head>
-      <title>Black Bow Consult Brand Guidelines</title>
+      <title>Blackbow Consult Brand Guidelines</title>
       <style>
         @page {
           size: A4;
@@ -276,7 +276,7 @@ export default function BrandingPage() {
           <div class="page-number">01</div>
         </div>
         <p class="section-intro">
-          This comprehensive brand manual establishes the visual identity standards for Black Bow Consult Limited. 
+          This comprehensive brand manual establishes the visual identity standards for Blackbow Consult Limited. 
           Our brand identity represents more than visual elements—it embodies our promise to clients and our 
           commitment to excellence in financial services.
         </p>
@@ -382,7 +382,7 @@ export default function BrandingPage() {
           a cohesive experience across all touchpoints.
         </p>
         <p style="color: #FFBE00; font-size: 16px; font-weight: 600;">
-          © 2024 Black Bow Consult Limited. All rights reserved.
+          © 2024 Blackbow Consult Limited. All rights reserved.
         </p>
       </div>
     </body>
@@ -563,7 +563,7 @@ export default function BrandingPage() {
                   Brand Manual
                 </h1>
                 <p className="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                  A comprehensive guide to Black Bow Consult's visual identity, ensuring consistency and excellence
+                  A comprehensive guide to Blackbow Consult's visual identity, ensuring consistency and excellence
                   across all brand touchpoints.
                 </p>
               </div>
@@ -1055,7 +1055,7 @@ export default function BrandingPage() {
               <div className="bg-gradient-to-r from-[#FFBE00] to-[#00B1D2] rounded-3xl p-12">
                 <h2 className="text-4xl font-bold text-black mb-6">Ready to Apply These Guidelines?</h2>
                 <p className="text-xl text-black/80 mb-8 max-w-2xl mx-auto">
-                  Download the complete brand manual and start creating consistent, professional materials for Black Bow
+                  Download the complete brand manual and start creating consistent, professional materials for Blackbow
                   Consult.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
