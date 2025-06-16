@@ -151,8 +151,8 @@ export default function ServicesPage() {
             </div>
             <div className="relative h-80">
               <Image
-                src="/TeamHardHat.png"
-                alt="Team with hard hats"
+                src="/BulldozerSmall.png"
+                alt="Bulldozer"
                 fill
                 className="object-contain rounded-lg"
               />

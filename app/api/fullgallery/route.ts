@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
-const GALLERY_DOC_ID = 'main'; // You can change this if you want multiple galleries
+const FULLGALLERY_DOC_ID = 'main'; // Document ID for the full gallery
 
 export async function GET() {
   try {
@@ -11,10 +11,10 @@ export async function GET() {
       return NextResponse.json({ error: 'Firebase not configured' }, { status: 503 });
     }
     
-    const docRef = doc(db, 'galleryConfig', GALLERY_DOC_ID);
+    const docRef = doc(db, 'fullGalleryConfig', FULLGALLERY_DOC_ID);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
-      return NextResponse.json({ error: 'Gallery config not found' }, { status: 404 });
+      return NextResponse.json({ error: 'FullGallery config not found' }, { status: 404 });
     }
     return NextResponse.json(docSnap.data());
   } catch (error) {
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     }
     
     const data = await req.json();
-    const docRef = doc(db, 'galleryConfig', GALLERY_DOC_ID);
+    const docRef = doc(db, 'fullGalleryConfig', FULLGALLERY_DOC_ID);
     await setDoc(docRef, data, { merge: true });
     return NextResponse.json({ success: true });
   } catch (error) {

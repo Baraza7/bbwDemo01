@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FloatingAdminNav from './FloatingAdminNav';
 
 const GalleryAdmin = ({ config, setConfig }) => {
   const [loading, setLoading] = useState(false);
@@ -59,6 +60,7 @@ const GalleryAdmin = ({ config, setConfig }) => {
 
   return (
     <div className="bg-gray-100 p-8 font-sans">
+      <FloatingAdminNav />
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800">Gallery Settings</h1>

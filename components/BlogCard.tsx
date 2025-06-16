@@ -14,24 +14,29 @@ interface BlogCardProps {
 
 export const BlogCard = ({ image, category, title, excerpt, author, date, slug }: BlogCardProps) => {
     return (
-        <div className="bg-yellow-400 rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white">
-            <Link href={`/media/${slug}`} className="block">
-                <div className="relative h-56">
-                    <Image 
+        <div className="bg-yellow-400 rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
+            {image ? (
+                <div className="relative w-full h-64">
+                    <Image
                         src={image}
                         alt={title}
                         fill
-                        className="object-cover"
+                        className="object-cover w-full h-full"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        priority
                     />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-300"></div>
                 </div>
-            </Link>
-            <div className="p-6">
+            ) : (
+                <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400">No Image</span>
+                </div>
+            )}
+            <div className="flex-1 flex flex-col justify-between p-8">
                 <div className="mb-4">
                     <span className="text-sm font-semibold text-black bg-black/10 py-1 px-3 rounded-full">{category}</span>
                 </div>
                 <h3 className="text-2xl font-bold font-serif mb-3 text-black group-hover:text-yellow-400">
-                    <Link href={`/media/${slug}`} className="hover:text-yellow-400 transition-colors duration-300">
+                    <Link href={`/blog/${slug}`} className="hover:text-yellow-400 transition-colors duration-300">
                         {title}
                     </Link>
                 </h3>
@@ -48,7 +53,7 @@ export const BlogCard = ({ image, category, title, excerpt, author, date, slug }
                         <span>{date}</span>
                     </div>
                 </div>
-                 <Link href={`/media/${slug}`}>
+                 <Link href={`/blog/${slug}`}>
                     <span className="inline-flex items-center mt-6 text-black group-hover:text-yellow-400 font-semibold transition-colors duration-300">
                         Read More <ArrowRight size={16} className="ml-2" />
                     </span>

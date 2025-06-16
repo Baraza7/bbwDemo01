@@ -1,5 +1,3 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Calendar, Clock, Download, ExternalLink, Search, User } from "lucide-react"
@@ -9,13 +7,97 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { InfoCard } from "@/components/InfoCard"
 import { FileText, Megaphone } from "lucide-react"
+import { BlogCard } from "@/components/BlogCard"
 import SharedPageSections from "@/components/SharedPageSections"
 import BentoGridGallery from "@/components/BentoGridGallery"
 import InnerHero from "@/components/InnerHero"
-import FullGallery from "@/components/FullGallery"
-import initialFullGalleryConfig from "../../fullGalleryConfig/fullGalleryConfig"
+import { unstable_noStore as noStore } from 'next/cache';
 
-export default function MediaPage() {
+// Define interfaces for type safety
+interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  authorBio: string;
+  authorImage: string;
+  date: string;
+  category: string;
+  tags: string[];
+  featuredImage: string;
+  readTime: string;
+  published: boolean;
+  featured: boolean;
+  seoTitle: string;
+  seoDescription: string;
+  seoKeywords: string;
+}
+
+interface BlogConfig {
+  settings: {
+    articlesPerPage: number;
+    showExcerpts: boolean;
+    showAuthor: boolean;
+    showDate: boolean;
+    showCategory: boolean;
+    enableComments: boolean;
+    featuredArticleId: string;
+  };
+  articles: Article[];
+}
+
+async function getBlogData(): Promise<BlogConfig | null> {
+  // noStore() is a Next.js function that prevents caching of this fetch request.
+  // This ensures we always get the latest blog posts from the database.
+  noStore();
+  
+  // We need to use the absolute URL for the API endpoint when fetching from a Server Component.
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+  const apiUrl = `${apiBaseUrl}/api/blog`;
+
+  try {
+    const res = await fetch(apiUrl);
+
+    if (!res.ok) {
+      // Log the error for server-side debugging
+      console.error(`API fetch failed with status: ${res.status}`, await res.text());
+      return null;
+    }
+    
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch blog data:', error);
+    return null;
+  }
+}
+
+export default async function BlogPage() {
+  const blogConfig = await getBlogData();
+
+  if (!blogConfig || !blogConfig.articles) {
+    return (
+      <div className="min-h-screen bg-white text-gray-800">
+        <Header />
+        <div className="pt-20 flex items-center justify-center min-h-[50vh]">
+          <div className="text-center">
+            <FileText className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+            <p className="text-gray-600">Could not load articles. Please try again later.</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+  
+  // Get published articles
+  const publishedArticles = blogConfig.articles.filter(article => article.published)
+  
+  // Get featured article
+  const featuredArticle = publishedArticles.find(article => article.featured) || publishedArticles[0]
+  
   return (
     <div className="min-h-screen bg-white text-gray-800">
       <Header />
@@ -23,9 +105,9 @@ export default function MediaPage() {
       {/* Hero Section */}
       <InnerHero>
         <h1 className="hero-title text-white">
-            Explore Our Journey
+            Stay Informed
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#FFBE00] to-[#00B1D2]">
-                in Picture & Motion
+                & Engaged
             </span>
         </h1>
       </InnerHero>
@@ -35,7 +117,7 @@ export default function MediaPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-0 max-w-5xl mx-auto">
             <InfoCard icon={<FileText className="h-8 w-8 text-white" />} title="Latest Updates">
-              <p className="text-sm">Latest insights and industry updates</p>
+              <p className="text-sm">{featuredArticle?.title || 'No articles yet'}</p>
             </InfoCard>
             <InfoCard icon={<Calendar className="h-8 w-8 text-white" />} title="Upcoming Event">
                 <p className="text-sm">Webinar: Navigating Market Volatility</p>
@@ -52,10 +134,10 @@ export default function MediaPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--accent-yellow)' }}>
-              Moments That Define Us
+              Latest Updates from Black Bow
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Dive into Blackbow's journey through a series of compelling visuals and dynamic videos, offering an immersive look into our story. Each carefully selected snapshot and video clip vividly illustrates our profound impact on the communities we serve, the strong team spirit that drives us, and our contribution to Africa's ongoing financial evolution. See how we're making a difference, frame by frame.
+              Welcome to our update hub. Here, you'll find the latest news, in-depth articles, and expert analysis on the financial landscape. We are committed to providing valuable insights that help you stay ahead in the dynamic world of trade, finance, and investment.
             </p>
           </div>
         </div>
@@ -66,18 +148,38 @@ export default function MediaPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              Picture Gallery
+              Latest Updates
             </h2>
             <p className="text-xl text-white/70 leading-relaxed">
-              Explore snapshots of Blackbow's journey—moments that define our impact and team spirit.
+              Dive into our collection of updates for expert analysis, industry trends, and valuable insights that can help inform your financial strategies and business decisions.
             </p>
           </div>
-          <FullGallery config={initialFullGalleryConfig} />
+          {publishedArticles.length === 0 ? (
+            <div className="text-center py-12">
+              <FileText className="w-16 h-16 mx-auto mb-4 text-white/50" />
+              <p className="text-white/70">No articles published yet.</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {publishedArticles.map((article) => (
+                <BlogCard 
+                  key={article.id}
+                  image={article.featuredImage}
+                  category={article.category}
+                  title={article.title}
+                  excerpt={article.excerpt}
+                  author={article.author}
+                  date={article.date}
+                  slug={article.slug}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* Media Gallery Section */}
-      <section className="py-24 bg-white">
+      {/* <section className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--accent-yellow)' }}>
@@ -89,7 +191,7 @@ export default function MediaPage() {
           </div>
           <BentoGridGallery />
         </div>
-      </section>
+      </section> */}
 
       <SharedPageSections />
       <Footer />
@@ -108,7 +210,7 @@ function NewsCard({ title, date, excerpt, slug }: { title: string; date: string;
       <h3 className="font-sans text-base xs:text-lg font-bold mb-2 text-[#27272A]">{title}</h3>
       <p className="font-body text-gray-600 text-xs xs:text-sm mb-3">{excerpt}</p>
       <Link
-        href={`/media/news/${slug}`}
+        href={`/blog/news/${slug}`}
         className="font-sans text-[#00B1D2] text-xs xs:text-sm font-medium hover:underline"
       >
         Read more <ArrowRight className="inline h-2 w-2 xs:h-3 xs:w-3 ml-1" />
@@ -181,7 +283,7 @@ function PressReleaseItem({
       <h3 className="font-sans text-lg xs:text-xl font-bold mb-2 xs:mb-3 text-[#27272A]">{title}</h3>
       <p className="font-body text-gray-600 mb-3 xs:mb-4 text-xs xs:text-sm">{excerpt}</p>
       <div className="flex justify-between items-center">
-        <Link href={`/media/press-releases/${slug}`}>
+        <Link href={`/blog/press-releases/${slug}`}>
           <Button
             variant="outline"
             style={{ borderColor: "#D01C1F", color: "#D01C1F" }}
@@ -305,4 +407,4 @@ function EventCard({
       </div>
     </Card>
   )
-}
+} 

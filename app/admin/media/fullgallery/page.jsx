@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import GalleryAdmin from "@/components/admin/GalleryAdmin";
+import FullGalleryAdmin from "@/components/admin/FullGalleryAdmin";
 import AdminLayout from "@/components/admin/AdminLayout";
-import initialGalleryConfig from "../../../galleryConfig/galleryConfig";
+import initialFullGalleryConfig from "../../../../fullGalleryConfig/fullGalleryConfig";
 
-export default function GalleryAdminPage() {
-  const [galleryConfig, setGalleryConfig] = useState(initialGalleryConfig);
+export default function FullGalleryAdminPage() {
+  const [fullGalleryConfig, setFullGalleryConfig] = useState(initialFullGalleryConfig);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -13,13 +13,13 @@ export default function GalleryAdminPage() {
   useEffect(() => {
     async function fetchConfig() {
       try {
-        const res = await fetch('/api/gallery');
-        if (!res.ok) throw new Error('Failed to fetch gallery config');
+        const res = await fetch('/api/fullgallery');
+        if (!res.ok) throw new Error('Failed to fetch full gallery config');
         const data = await res.json();
-        setGalleryConfig(data);
+        setFullGalleryConfig(data);
       } catch (err) {
-        setError('Could not load latest gallery config. Showing default.');
-        setGalleryConfig(initialGalleryConfig);
+        setError('Could not load latest full gallery config. Showing default.');
+        setFullGalleryConfig(initialFullGalleryConfig);
       } finally {
         setLoading(false);
       }
@@ -30,16 +30,16 @@ export default function GalleryAdminPage() {
   if (loading) {
     return (
       <AdminLayout 
-        title="Gallery Management"
+        title="Full Gallery Management"
         breadcrumbs={[
-          { label: "About", href: "/admin/about" },
-          { label: "Gallery" }
+          { label: "Media", href: "/admin/media" },
+          { label: "Full Gallery" }
         ]}
-        backHref="/admin/about"
+        backHref="/admin/media"
       >
         <div className="text-center py-8">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading gallery configuration...</p>
+          <p className="mt-4 text-gray-600">Loading full gallery configuration...</p>
         </div>
       </AdminLayout>
     );
@@ -47,12 +47,12 @@ export default function GalleryAdminPage() {
 
   return (
     <AdminLayout 
-      title="Gallery Management"
+      title="Full Gallery Management"
       breadcrumbs={[
-        { label: "About", href: "/admin/about" },
-        { label: "Gallery" }
+        { label: "Media", href: "/admin/media" },
+        { label: "Full Gallery" }
       ]}
-      backHref="/admin/about"
+      backHref="/admin/media"
     >
       {error && (
         <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-4">
@@ -60,7 +60,7 @@ export default function GalleryAdminPage() {
         </div>
       )}
       <div className="bg-white rounded-lg shadow-sm">
-        <GalleryAdmin config={galleryConfig} setConfig={setGalleryConfig} />
+        <FullGalleryAdmin config={fullGalleryConfig} setConfig={setFullGalleryConfig} />
       </div>
     </AdminLayout>
   );

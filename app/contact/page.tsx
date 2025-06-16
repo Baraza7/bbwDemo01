@@ -21,14 +21,6 @@ export default function ContactPage() {
                 Talk to Us
             </span>
         </h1>
-        <p className="hero-description max-w-2xl mx-auto text-sm md:text-base text-white/80 mt-4">
-            We're here to answer your questions and help you unlock your business's potential. Reach out and let's start a conversation.
-        </p>
-         <div className="mt-4 text-center">
-            <span className="inline-block px-8 py-2 text-lg font-bold text-black bg-yellow-400">
-                PLACEHOLDER001
-            </span>
-        </div>
       </InnerHero>
 
       {/* Info Cards Section - Overlapping Design */}

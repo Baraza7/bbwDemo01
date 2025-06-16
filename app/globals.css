@@ -604,19 +604,31 @@ html, body {
   @apply bottom-section-link mt-3 text-sm inline-block transition-colors duration-300;
 }
 
-/* Hover states */
+/* Restrict hover effect to only the 3 inner cards in #services-card-section */
+#services-card-section .hero-service-card:hover {
+  background-color: #fff !important;
+  transform: scaleY(1.05);
+}
+#services-card-section .hero-service-card:hover .hero-service-title {
+  color: #B31117 !important;
+}
+#services-card-section .hero-service-card:hover .hero-service-description,
+#services-card-section .hero-service-card:hover .hero-service-link {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+/* Remove or override the global .hero-service-card:hover so it does not affect other cards */
 .hero-service-card:hover {
-  @apply bg-white scale-y-105;
+  /* No-op: override to prevent global effect */
 }
-
-.hero-service-card:hover .hero-service-title {
-  color: #B31117; /* Red title on hover */
-}
-
+.hero-service-card:hover .hero-service-title,
 .hero-service-card:hover .hero-service-description,
 .hero-service-card:hover .hero-service-link {
-  @apply text-black no-underline;
+  /* No-op: override to prevent global effect */
 }
+
+/* Retain entry animation for the section (already present via transition on #services-card-section) */
 
 /* Individual default card backgrounds */
 .hero-service-card-bg1 {

@@ -393,13 +393,14 @@ export default function Home() {
             className={`absolute bottom-0 left-0 right-0 h-[30vh] z-30 transition-transform ease-out ${
               servicesCardVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
             }`}
-            style={{ backgroundColor: '#B31117', transitionDelay: servicesCardVisible ? "2s" : "0s",  transitionDuration: '3000ms' }}
+            style={{ backgroundColor: 'rgba(0,0,0,0.7)', transitionDelay: servicesCardVisible ? "2s" : "0s",  transitionDuration: '3000ms' }}
           >
             <div className="container mx-auto h-full px-4 md:px-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-0 h-full items-center">
                 {/* Card 1: Trade Finance */}
                 <div 
                   className="hero-service-card hero-service-card-bg1"
+                  style={{ backgroundColor: '#cf2027' }}
                 >
                   <h3 
                     className="hero-service-title"
@@ -419,6 +420,7 @@ export default function Home() {
                 {/* Card 2: Investment Advisory */}
                 <div 
                   className="hero-service-card hero-service-card-bg2"
+                  style={{ backgroundColor: '#b32025' }}
                 >
                   <h3 
                     className="hero-service-title"
@@ -438,6 +440,7 @@ export default function Home() {
                 {/* Card 3: Insurance Solutions */}
                 <div 
                   className="hero-service-card hero-service-card-bg1"
+                  style={{ backgroundColor: '#cf2027' }}
                 >
                   <h3 
                     className="hero-service-title"

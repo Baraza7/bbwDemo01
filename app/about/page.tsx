@@ -31,10 +31,6 @@ export default function AboutPage() {
               African Business
             </span>
           </h1>
-          <p className="hero-description max-w-3xl mx-auto text-sm md:text-base" style={{ fontSize: "0.5em" }}>
-            Since 2014, we've been providing innovative trade finance, insurance, and investment solutions that
-            unlock growth and success for businesses across Africa.
-          </p>
         </div>
       </InnerHero>
 
@@ -182,8 +178,8 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 max-[600px]:grid-cols-1 gap-8 items-center">
             <div className="relative h-80">
               <Image
-                src="/TeamHardHat.png"
-                alt="Team with hard hats"
+                src="/MoneyTree.png"
+                alt="Money Tree"
                 fill
                 className="object-contain rounded-lg"
               />
@@ -206,12 +202,20 @@ export default function AboutPage() {
       {/* Team Section - Modern Grid */}
       <TeamSection />
       
-      {/* Gallery Moved Here */}
-      <div className="py-12 bg-gray-50">
-        <div className="container mx-auto">
+      {/* Gallery Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--accent-yellow)' }}>
+              Moments That Define Us
+            </h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              Step into the dynamic world of Blackbow Consult through our Media Gallery. Here, we capture the essence of our journey—from impactful client engagements and industry events to the dedicated team driving Africa's financial future.
+            </p>
+          </div>
           <ImageAccordion config={galleryConfig} />
         </div>
-      </div>
+      </section>
 
       {/* Call to Action Section */}
       <div style={{
