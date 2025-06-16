@@ -7,7 +7,7 @@ import Link from 'next/link';
 const pageCards = [
     { title: "Home", description: "Manage the home page content.", icon: Home },
     { title: "About", description: "Manage the about page content.", icon: Info, link: "/admin/about" },
-    { title: "Services", description: "Manage the services page content.", icon: Server },
+    { title: "Services", description: "Manage the services page content.", icon: Server, link: "/admin/services" },
     { title: "Updates", description: "Manage update posts and articles.", icon: Rss, link: "/admin/blog/articles" },
     { title: "Media", description: "Manage the media page content.", icon: ImageIcon, link: "/admin/media" },
     { title: "Contacts", description: "Manage contact information and forms.", icon: Mail },

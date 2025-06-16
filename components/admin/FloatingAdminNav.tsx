@@ -13,9 +13,11 @@ const FloatingAdminNav = () => {
   // Get the parent admin page for back navigation
   const getParentAdminPath = () => {
     if (pathname.includes('/admin/media/fullgallery')) return '/admin/media';
+    if (pathname.includes('/admin/services/manage')) return '/admin/services';
     if (pathname.includes('/admin/gallery')) return '/admin/about';
     if (pathname.includes('/admin/about')) return '/admin';
     if (pathname.includes('/admin/media')) return '/admin';
+    if (pathname.includes('/admin/services')) return '/admin';
     return '/admin';
   };
 
