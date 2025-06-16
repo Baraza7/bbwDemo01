@@ -412,7 +412,7 @@ export default function Home() {
                   </p>
                   <Link 
                     className="hero-service-link"
-                    href="/services/trade-finance"
+                    href="/services"
                   >
                     Learn More <ArrowRight className="inline h-4 w-4 ml-1" />
                   </Link>
@@ -432,7 +432,7 @@ export default function Home() {
                   </p>
                   <Link 
                     className="hero-service-link"
-                    href="/services/investment-advisory"
+                    href="/services"
                   >
                     Learn More <ArrowRight className="inline h-4 w-4 ml-1" />
                   </Link>
@@ -452,7 +452,7 @@ export default function Home() {
                   </p>
                   <Link 
                     className="hero-service-link"
-                    href="/services/insurance-solutions"
+                    href="/services"
                   >
                     Learn More <ArrowRight className="inline h-4 w-4 ml-1" />
                   </Link>
