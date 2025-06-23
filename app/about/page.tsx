@@ -216,21 +216,6 @@ export default function AboutPage() {
           <ImageAccordion config={galleryConfig} />
         </div>
       </section>
-
-      {/* Call to Action Section */}
-      <div style={{
-        backgroundImage: "linear-gradient(to bottom right, #960606 0%, #960606 15%, #D01C1F 25%, #D01C1F 100%)",
-        margin: 0,
-        paddingTop: "3.9rem",
-        paddingBottom: "3.9rem",
-        width: "100vw",
-        marginLeft: "calc(-50vw + 50%)",
-        marginRight: "calc(-50vw + 50%)",
-        display: 'flex',
-        alignItems: 'center',
-      }}>
-        <Call2Action />
-      </div>
       
       {/* Testimonial Slider */}
       <TestimonialSlider />

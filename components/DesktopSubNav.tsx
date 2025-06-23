@@ -11,9 +11,10 @@ export default function DesktopSubNav() {
         <Link href="/home2" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">Home2</Link>
         <Link href="/about" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">About</Link>
         <Link href="/services" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">Services</Link>
-        <Link href="/blog" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">Updates</Link>
+        <Link href="/services/investment-advisory" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">Investment Advisory</Link>
         <Link href="/media" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">Media</Link>
-        <Link href="/contact" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">Contact</Link>
+        <Link href="/blog" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">Blog</Link>
+        <Link href="/contacts" className="font-sans font-normal text-[13px] text-gray-800 hover:text-[#febf00] transition-colors duration-300">Contacts</Link>
       </div>
     </nav>
   );

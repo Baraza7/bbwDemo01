@@ -87,10 +87,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/contacts"
                   className="text-gray-400 hover:text-[#FFBE00] transition-colors text-sm sm:text-base"
                 >
-                  Contact
+                  Contacts
                 </Link>
               </li>
             </ul>
@@ -145,7 +145,7 @@ export default function Footer() {
 
           {/* Contact and Newsletter Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4 font-heading">Contact</h3>
+            <h3 className="text-lg font-semibold mb-4 font-heading">Contacts</h3>
             <ul className="space-y-2 mb-6">
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" style={{ color: "#FFBE00" }} />

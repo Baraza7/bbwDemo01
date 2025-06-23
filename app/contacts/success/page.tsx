@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowLeft, CheckCircle } from "lucide-react"
+import { ArrowLeft, CheckCircle, CircleCheck, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -15,10 +15,10 @@ export default function ContactSuccessPage() {
         <div className="container mx-auto px-4 md:px-6 text-center">
           <div className="max-w-md mx-auto">
             <div className="mb-6 flex justify-center">
-              <CheckCircle className="h-20 w-20 text-green-500" />
+              <CircleCheck className="h-16 w-16 text-green-500 mx-auto mb-6" />
             </div>
             <h1 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-[#27272A]">
-              Message Sent Successfully!
+              Message Sent Successfully
             </h1>
             <p className="font-body text-gray-600 mb-8 text-lg">
               Thank you for contacting Blackbow Consult. We have received your message and will get back to you as soon
@@ -31,17 +31,17 @@ export default function ContactSuccessPage() {
                   className="hover:bg-opacity-90 rounded-full px-8"
                   size="lg"
                 >
-                  Back to Home
+                  <Home className="mr-2 h-4 w-4" /> Go to Homepage
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="/contacts">
                 <Button
                   variant="outline"
                   style={{ borderColor: "#00B1D2", color: "#00B1D2" }}
                   className="hover:bg-[#00B1D2] hover:text-white rounded-full px-8"
                   size="lg"
                 >
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Contact
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Contacts
                 </Button>
               </Link>
             </div>

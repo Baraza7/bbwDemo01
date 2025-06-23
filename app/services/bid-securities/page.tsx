@@ -28,7 +28,7 @@ export default function BidSecuritiesPage() {
               Secure your competitive advantage with reliable bid securities that demonstrate your commitment and capability to potential clients.
             </p>
             {/* Using Fiery Red for CTA as specified */}
-            <Link href="#contact">
+            <Link href="#contacts">
               <Button
                 size="lg"
                 style={{ backgroundColor: "#D01C1F", color: "white" }}
@@ -62,7 +62,7 @@ export default function BidSecuritiesPage() {
             <div className="md:col-span-5">
               <div className="relative rounded-lg overflow-hidden shadow-xl border border-gray-200">
                 <Image
-                  src="/bid-security-illustration.png"
+                  src="/BID SECURITY.png"
                   alt="Bid Security Illustration"
                   width={500}
                   height={600}
@@ -185,15 +185,15 @@ export default function BidSecuritiesPage() {
                 </li>
               </ul>
             </div>
-            <div className="relative rounded-lg overflow-hidden shadow-xl border border-gray-200">
-              <Image
-                src="/tender-process.png"
-                alt="Tender Process"
-                width={500}
-                height={600}
-                className="object-cover w-full h-full"
-              />
-            </div>
+                          <div className="relative rounded-lg overflow-hidden shadow-xl border border-gray-200">
+                <Image
+                  src="/finance-illustration.png"
+                  alt="Tender Process"
+                  width={500}
+                  height={600}
+                  className="object-cover w-full h-full"
+                />
+              </div>
           </div>
         </div>
       </section>
@@ -277,26 +277,12 @@ export default function BidSecuritiesPage() {
           <p className="font-body text-gray-300 mb-8 text-lg max-w-2xl mx-auto">
             Don't let lack of bid securities prevent you from competing for valuable contracts. Contact us today for a consultation.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                style={{ backgroundColor: "#D01C1F", color: "white" }}
-                className="hover:bg-opacity-90 rounded-full px-8"
-              >
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="/services">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black rounded-full px-8"
-              >
-                View All Services
-              </Button>
-            </Link>
-          </div>
+          <Link href="/contacts">
+            <Button size="lg" className="bg-[#FFBE00] text-black hover:bg-opacity-90">
+              Get Your Bid Security
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 

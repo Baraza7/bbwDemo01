@@ -6,231 +6,184 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
-export default function ContactForm() {
+export default function ContactsForm() {
   const router = useRouter()
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-    privacy: false,
-  })
-  const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors((prev) => {
-        const newErrors = { ...prev }
-        delete newErrors[name]
-        return newErrors
-      })
-    }
-  }
+  const formSchema = z.object({
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Email is invalid"),
+    phone: z.string().optional(),
+    subject: z.string().min(1, "Subject is required"),
+    message: z.string().min(1, "Message is required"),
+    privacy: z.boolean().refine((value) => value === true, "You must agree to the privacy policy"),
+  })
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
-    setFormData((prev) => ({ ...prev, [name]: checked }))
-    // Clear error when user checks the box
-    if (errors[name]) {
-      setErrors((prev) => {
-        const newErrors = { ...prev }
-        delete newErrors[name]
-        return newErrors
-      })
-    }
-  }
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+      privacy: false,
+    },
+  })
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {}
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required"
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required"
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid"
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required"
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required"
-    }
-
-    if (!formData.privacy) {
-      newErrors.privacy = "You must agree to the privacy policy"
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!validateForm()) {
-      return
-    }
-
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/contacts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(values),
       })
 
-      const data = await response.json()
-
-      if (data.success) {
-        router.push("/contact/success")
+      if (response.ok) {
+        router.push("/contacts/success")
       } else {
-        router.push("/contact/error")
+        router.push("/contacts/error")
       }
     } catch (error) {
-      console.error("Error submitting form:", error)
-      router.push("/contact/error")
+      router.push("/contacts/error")
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <label htmlFor="name" className="font-sans text-sm font-medium text-gray-700">
-            Full Name <span className="text-[#D01C1F]">*</span>
-          </label>
-          <input
-            id="name"
+    <Form {...form}>
+      <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
             name="name"
-            type="text"
-            value={formData.name}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFBE00] font-body ${
-              errors.name ? "border-red-500" : "border-gray-300"
-            }`}
-            placeholder="Your name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Full Name <span className="text-[#D01C1F]">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="Your name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-        </div>
-        <div className="space-y-2">
-          <label htmlFor="email" className="font-sans text-sm font-medium text-gray-700">
-            Email Address <span className="text-[#D01C1F]">*</span>
-          </label>
-          <input
-            id="email"
+          <FormField
+            control={form.control}
             name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFBE00] font-body ${
-              errors.email ? "border-red-500" : "border-gray-300"
-            }`}
-            placeholder="Your email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Email Address <span className="text-[#D01C1F]">*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="Your email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
-      </div>
 
-      <div className="space-y-2">
-        <label htmlFor="phone" className="font-sans text-sm font-medium text-gray-700">
-          Phone Number
-        </label>
-        <input
-          id="phone"
+        <FormField
+          control={form.control}
           name="phone"
-          type="tel"
-          value={formData.phone}
-          onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFBE00] font-body"
-          placeholder="Your phone number"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone Number</FormLabel>
+              <FormControl>
+                <Input placeholder="Your phone number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </div>
 
-      <div className="space-y-2">
-        <label htmlFor="subject" className="font-sans text-sm font-medium text-gray-700">
-          Subject <span className="text-[#D01C1F]">*</span>
-        </label>
-        <input
-          id="subject"
+        <FormField
+          control={form.control}
           name="subject"
-          type="text"
-          value={formData.subject}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFBE00] font-body ${
-            errors.subject ? "border-red-500" : "border-gray-300"
-          }`}
-          placeholder="How can we help you?"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Subject <span className="text-[#D01C1F]">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input placeholder="How can we help you?" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
-      </div>
 
-      <div className="space-y-2">
-        <label htmlFor="message" className="font-sans text-sm font-medium text-gray-700">
-          Message <span className="text-[#D01C1F]">*</span>
-        </label>
-        <textarea
-          id="message"
+        <FormField
+          control={form.control}
           name="message"
-          rows={5}
-          value={formData.message}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFBE00] font-body ${
-            errors.message ? "border-red-500" : "border-gray-300"
-          }`}
-          placeholder="Your message"
-        ></textarea>
-        {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-      </div>
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Message <span className="text-[#D01C1F]">*</span>
+              </FormLabel>
+              <FormControl>
+                <Textarea placeholder="Your message" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <div className="flex items-start">
-        <div className="flex items-center h-5">
-          <input
-            id="privacy"
-            name="privacy"
-            type="checkbox"
-            checked={formData.privacy}
-            onChange={handleCheckboxChange}
-            className={`w-4 h-4 border rounded focus:ring-[#FFBE00] ${
-              errors.privacy ? "border-red-500" : "border-gray-300"
-            }`}
-          />
-        </div>
-        <div className="ml-3 text-sm">
-          <label htmlFor="privacy" className="font-body text-gray-600">
-            I agree to the{" "}
-            <a href="#" className="text-[#00B1D2] hover:underline">
-              privacy policy
-            </a>
-          </label>
-          {errors.privacy && <p className="text-red-500 text-sm mt-1">{errors.privacy}</p>}
-        </div>
-      </div>
+        <FormField
+          control={form.control}
+          name="privacy"
+          render={({ field }) => (
+            <FormItem className="flex items-start">
+              <FormControl>
+                <input
+                  id="privacy"
+                  name="privacy"
+                  type="checkbox"
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
+                  className={`w-4 h-4 border rounded focus:ring-[#FFBE00] ${
+                    form.formState.errors.privacy ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+              </FormControl>
+              <div className="ml-3 text-sm">
+                <FormLabel>
+                  I agree to the{" "}
+                  <a href="#" className="text-[#00B1D2] hover:underline">
+                    privacy policy
+                  </a>
+                </FormLabel>
+                <FormMessage />
+              </div>
+            </FormItem>
+          )}
+        />
 
-      <Button
-        type="submit"
-        style={{ backgroundColor: "#D01C1F", color: "white" }}
-        className="hover:bg-opacity-90 rounded-full px-8 py-3 flex items-center"
-        size="lg"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? "Sending..." : "Send Message"} <Send className="ml-2 h-4 w-4" />
-      </Button>
-    </form>
+        <Button
+          type="submit"
+          style={{ backgroundColor: "#D01C1F", color: "white" }}
+          className="hover:bg-opacity-90 rounded-full px-8 py-3 flex items-center"
+          size="lg"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Sending..." : "Send Message"} <Send className="ml-2 h-4 w-4" />
+        </Button>
+      </form>
+    </Form>
   )
 }

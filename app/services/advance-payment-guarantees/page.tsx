@@ -17,9 +17,23 @@ export default function AdvancePaymentGuaranteesPage() {
         </div>
         <div className="container relative z-10 mx-auto px-4 md:px-6 text-white">
           <div className="max-w-3xl">
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-[42px] font-bold mb-6 leading-tight tracking-tight">
-              Advance Payment Guarantees
-            </h1>
+            <div className="flex flex-col md:flex-row items-center justify-between">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 md:mb-0">Advance Payment Guarantees</h1>
+              <div className="flex space-x-4">
+                <Link href="#overview">
+                  <Button variant="outline" className="text-white">Overview</Button>
+                </Link>
+                <Link href="#benefits">
+                  <Button variant="outline" className="text-white">Benefits</Button>
+                </Link>
+                <Link href="#process">
+                  <Button variant="outline" className="text-white">Process</Button>
+                </Link>
+                <Link href="#contacts">
+                  <Button variant="outline" className="text-white">Contact</Button>
+                </Link>
+              </div>
+            </div>
             <p className="font-sans text-lg md:text-xl lg:text-2xl mb-8 text-gray-200 max-w-2xl leading-relaxed">
               Secure upfront payments for your projects with our reliable advance payment guarantees that protect both parties.
             </p>
@@ -266,32 +280,16 @@ export default function AdvancePaymentGuaranteesPage() {
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-[#27272A] text-white">
         <div className="container mx-auto px-4 md:px-6 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">
-            Optimize Your Project Cash Flow
-          </h2>
-          <p className="font-body text-gray-300 mb-8 text-lg max-w-2xl mx-auto">
-            Secure advance payments and accelerate your project mobilization with our reliable guarantee solutions.
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Secure Your Advance Payments Today</h2>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
+            Our expert team is ready to assist you in securing the advance payment guarantees you need to move your projects forward with confidence.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                style={{ backgroundColor: "#D01C1F", color: "white" }}
-                className="hover:bg-opacity-90 rounded-full px-8"
-              >
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="/services">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black rounded-full px-8"
-              >
-                View All Services
-              </Button>
-            </Link>
-          </div>
+          <Link href="/contacts">
+            <Button size="lg" className="bg-[#FFBE00] text-black hover:bg-opacity-90">
+              Apply Now
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 

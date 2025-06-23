@@ -76,21 +76,6 @@ export default function MediaPage() {
         </div>
       </section>
 
-      {/* Media Gallery Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-4xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--accent-yellow)' }}>
-              Our Media Gallery
-            </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Explore moments from our events, workshops, and company milestones. This gallery captures the vibrant spirit and professional dedication of the Blackbow team.
-            </p>
-          </div>
-          <BentoGridGallery />
-        </div>
-      </section>
-
       <SharedPageSections />
       <Footer />
     </div>

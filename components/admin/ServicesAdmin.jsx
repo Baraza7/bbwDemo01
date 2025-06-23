@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { Plus, Trash2, Edit, Save, X, Briefcase, FileText, DollarSign, Shield, Zap, Settings } from 'lucide-react';
+import { Plus, Trash2, Edit, Save, X, Briefcase, FileText, DollarSign, Shield, Zap, Settings, Handshake } from 'lucide-react';
 import FloatingAdminNav from './FloatingAdminNav';
 
 const ServicesAdmin = ({ config: staticConfig }) => {
@@ -22,6 +22,7 @@ const ServicesAdmin = ({ config: staticConfig }) => {
     { name: 'Shield', component: Shield, value: 'Shield' },
     { name: 'Zap', component: Zap, value: 'Zap' },
     { name: 'Settings', component: Settings, value: 'Settings' },
+    { name: 'Handshake', component: Handshake, value: 'Handshake' },
   ];
 
   // Fetch latest config from API
@@ -52,6 +53,132 @@ const ServicesAdmin = ({ config: staticConfig }) => {
     fetchConfig();
   }, [staticConfig]);
 
+  // Existing services data to migrate
+  const existingServices = [
+    {
+      title: "Bid Securities",
+      description: "Provides financial assurance to project owners that bidders will honor their obligations, facilitating seamless participation in tenders.",
+      icon: "FileText",
+      href: "/services/bid-securities"
+    },
+    {
+      title: "Performance Guarantees", 
+      description: "A guarantee issued to a procuring entity on behalf of the winning bidder to guarantee successful completion of the awarded project.",
+      icon: "Handshake",
+      href: "/services/performance-guarantees"
+    },
+    {
+      title: "Advance Payment Guarantees",
+      description: "Issued on behalf of our clients to secure upfront payments for jobs awarded but not yet executed, enabling project mobilization.",
+      icon: "DollarSign", 
+      href: "/services/advance-payment-guarantees"
+    },
+    {
+      title: "Contractors' All Risk Insurance",
+      description: "Comprehensive insurance coverage protecting against all risks associated with construction projects and work-related injuries.",
+      icon: "Shield",
+      href: "/services/contractors-insurance"
+    },
+    {
+      title: "Trade Finance Solutions",
+      description: "Innovative and flexible financing that optimizes cash flow and mitigates risks associated with domestic and international trade.",
+      icon: "Briefcase",
+      href: "/services/trade-finance"
+    },
+    {
+      title: "Investment Advisory",
+      description: "Expert advisory services to help you navigate financial markets and make informed decisions to grow your wealth.",
+      icon: "Zap",
+      href: "/services/investment-advisory"
+    }
+  ];
+
+  // Import existing services
+  const importExistingServices = async () => {
+    setSaving(true);
+    setError('');
+    setSuccess('');
+    
+    try {
+      const migratedServices = existingServices.map((service, index) => ({
+        id: Date.now().toString() + index,
+        title: service.title,
+        slug: service.href.replace('/services/', ''),
+        shortDescription: service.description,
+        fullDescription: `<h2>About ${service.title}</h2><p>${service.description}</p><h3>Key Features</h3><ul><li>Professional service delivery</li><li>Competitive pricing</li><li>Expert consultation</li><li>Timely execution</li></ul>`,
+        icon: service.icon,
+        category: service.title.includes('Guarantee') || service.title.includes('Securities') ? 'Financial Guarantees' : 
+                 service.title.includes('Insurance') ? 'Insurance Solutions' :
+                 service.title.includes('Finance') ? 'Trade Finance' : 'Advisory Services',
+        tags: service.title.toLowerCase().split(' '),
+        featuredImage: service.title.includes('Bid') ? '/BID SECURITY.png' :
+                      service.title.includes('Performance') ? '/PERFOMANCE GUARANTEES.png' :
+                      service.title.includes('Advance') ? '/ADVANCE PAYMENT GUARANTEES.png' :
+                      service.title.includes('Insurance') ? '/INSURANCESOLUTIONS.png' :
+                      service.title.includes('Trade') ? '/TRADE FINANCE.png' :
+                      '/INVESTMENT ADVISORY.png',
+        heroImage: '',
+        price: 'Contact for Quote',
+        duration: '1-30 days',
+        features: [
+          'Professional consultation',
+          'Competitive rates',
+          'Fast processing',
+          'Expert guidance',
+          'Reliable service'
+        ],
+        benefits: [
+          'Enhanced credibility',
+          'Risk mitigation',
+          'Improved cash flow',
+          'Professional support',
+          'Peace of mind'
+        ],
+        process: [
+          'Initial consultation',
+          'Requirements assessment', 
+          'Documentation preparation',
+          'Processing and approval',
+          'Service delivery'
+        ],
+        requirements: [
+          'Valid business registration',
+          'Financial statements',
+          'Project documentation',
+          'Identification documents',
+          'Application forms'
+        ],
+        published: true,
+        featured: index < 3, // Make first 3 featured
+        seoTitle: `${service.title} - Blackbow Consult`,
+        seoDescription: service.description,
+        seoKeywords: service.title.toLowerCase().split(' ').join(', '),
+        ctaText: 'Get a Quote',
+        ctaLink: '/contacts'
+      }));
+
+      const updatedConfig = {
+        ...servicesConfig,
+        services: migratedServices
+      };
+
+      const response = await fetch('/api/services', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedConfig)
+      });
+
+      if (!response.ok) throw new Error('Failed to import services');
+
+      setServicesConfig(updatedConfig);
+      setSuccess(`Successfully imported ${migratedServices.length} services!`);
+    } catch (err) {
+      setError('Failed to import existing services: ' + err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   // Add new service
   const addService = () => {
     const newService = {
@@ -77,7 +204,7 @@ const ServicesAdmin = ({ config: staticConfig }) => {
       seoDescription: '',
       seoKeywords: '',
       ctaText: 'Get a Quote',
-      ctaLink: '/contact'
+      ctaLink: '/contacts'
     };
     
     setEditingService(newService);
@@ -97,6 +224,16 @@ const ServicesAdmin = ({ config: staticConfig }) => {
             <p className="text-gray-600">Manage services and settings</p>
           </div>
           <div className="flex gap-4">
+            {(!servicesConfig?.services || servicesConfig.services.length === 0) && (
+              <button
+                onClick={importExistingServices}
+                disabled={saving}
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 disabled:opacity-50"
+              >
+                <FileText className="w-4 h-4" />
+                {saving ? 'Importing...' : 'Import Existing Services'}
+              </button>
+            )}
             <button
               onClick={addService}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"

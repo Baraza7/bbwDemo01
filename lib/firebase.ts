@@ -5,24 +5,31 @@ import { getStorage } from "firebase/storage";
 import { firebaseConfig } from "./firebase-config";
 
 // Initialize Firebase with error handling
-let app: any = null;
-let auth: any = null;
-let db: any = null;
-let storage: any = null;
+let app;
+let auth;
+let db;
+let storage;
 
-try {
-  app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-  
-  // Initialize services
+// Prevent re-initialization on hot reloads
+if (!getApps().length) {
+  try {
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+    storage = getStorage(app);
+  } catch (error) {
+    console.error("Firebase initialization failed:", error);
+    // Set to null if initialization fails
+    app = null;
+    auth = null;
+    db = null;
+    storage = null;
+  }
+} else {
+  app = getApp();
   auth = getAuth(app);
   db = getFirestore(app);
   storage = getStorage(app);
-} catch (error) {
-  console.warn("Firebase initialization failed:", error);
-  // Create mock objects for development
-  auth = null;
-  db = null;
-  storage = null;
 }
 
 export { app, auth, db, storage };

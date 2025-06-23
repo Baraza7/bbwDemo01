@@ -1,70 +1,44 @@
 import React from "react";
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from "lucide-react";
+import { Button } from "./ui/button";
 
-const Call2Action = () => {
-  return (
-    <section
-      id="cta-section"
-      className="w-full" 
-    >
-      <div id="cta-responsive-container" className="mx-auto w-full max-w-screen-xl px-4 md:px-6">
-        <div
-          id="gradient-inner-container"
-          className="p-8 xs:p-12 md:p-16 rounded-2xl text-center"
-          style={{
-            backgroundColor: "transparent",
-          }}
-        >
-          <h2
-            id="cta-title"
-            className="mb-4 xs:mb-6"
-            style={{
-              fontFamily: "Italiana, 'Italiana Fallback', serif",
-              fontSize: "clamp(2rem, 5vw, 3rem)",
-              fontWeight: 700,
-              color: "rgb(255, 255, 255)",
-              textAlign: "center",
-              lineHeight: "1.2",
-              letterSpacing: "1px",
-            }}
-          >
-            Ready to Elevate Your Business?
-          </h2>
-
-          <p
-            id="cta-inner-text"
-            className="font-inter text-white/90 max-w-2xl mx-auto mb-6 xs:mb-8"
-            style={{
-              fontSize: "clamp(0.875rem, 2.5vw, 1.125rem)",
-              lineHeight: "1.6",
-            }}
-          >
-            Let's discuss how Black Bow Consult can provide the financial solutions you need to achieve your goals. Contact us today for a personalized consultation.
-          </p>
-
-          <a id="cta-link" href="/contact" className="inline-block">
-            <button
-              id="cta-button"
-              className="modern-hover-button inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 bg-white transition-all duration-500 ease-out rounded-full px-8 py-4 text-lg font-semibold shadow-md relative overflow-hidden"
+export function Call2Action() {
+    return (
+        <section className="relative bg-black text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div 
+                className="absolute inset-0 bg-cover bg-center z-0"
+                style={{ backgroundImage: "url('/hero-background.jpg')" }}
             >
-              <span
-                id="cta-button-text"
-                className="font-inter font-semibold relative z-10 transition-colors duration-300"
-                style={{ color: "black" }}
-              >
-                Contact Us Now
-              </span>
-              <ArrowRight
-                id="cta-button-icon"
-                className="ml-2 h-5 w-5 relative z-10 transition-all duration-300"
-                style={{ color: "black" }}
-              />
-            </button>
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-};
+                <div className="absolute inset-0 bg-black opacity-60"></div>
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 max-w-4xl mx-auto text-center">
+                <h2 className="text-4xl font-extrabold sm:text-5xl lg:text-6xl font-serif mb-6">
+                    Ready to Start Your Next Project?
+                </h2>
+                <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10 font-sans">
+                    Let's discuss how Black Bow Consult can provide the financial solutions you need to achieve your goals. Contact us today for a personalized consultation.
+                </p>
+                <div className="flex justify-center">
+                    <a id="cta-link" href="/contacts" className="inline-block">
+                        <Button
+                            size="lg"
+                            className="bg-[#FFBE00] text-black font-bold text-lg py-4 px-8 rounded-full shadow-lg hover:bg-yellow-400 transition-transform transform hover:scale-105"
+                            style={{
+                                clipPath: 'polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%)',
+                                borderRadius: '0',
+                            }}
+                        >
+                            Contact Us Now
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                    </a>
+                </div>
+            </div>
+        </section>
+    )
+}
 
 export default Call2Action; 

@@ -3,13 +3,14 @@
 import { useEffect, useState, useRef, useLayoutEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react"
+import { ArrowRight, Mail, MapPin, Phone, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { ResponsiveContainer } from "@/components/responsive-container"
 import { useMobile } from "@/hooks/use-mobile"
 import { useTheme } from "next-themes"
+import { BlogCard } from "@/components/BlogCard"
 
 // Component for Service Card
 function ServiceCard({ title, description, icon }: { title: string; description: string; icon: string }) {
@@ -323,32 +324,28 @@ export default function Home() {
                   buttonsVisible ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <Link href="/services">
-                  <Button
-                    size="lg"
-                    style={{ backgroundColor: "#FFBE00", color: "#27272A" }}
-                    className="button-text hover:bg-opacity-90 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
-                  >
-                    Our Services <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                <Link
+                  href="/services"
+                  className="button-text inline-block rounded-md bg-[#FFBE00] px-6 py-3 text-center font-semibold text-[#27272A] transition-all duration-300 hover:-translate-y-0.5 hover:bg-opacity-90 hover:shadow-lg"
+                  style={{ textDecoration: 'none' }}
+                >
+                  Our Services <ArrowRight className="ml-2 inline-block h-4 w-4" />
                 </Link>
-                <Link href="/contact">
-                  <Button
-                    size="lg"
-                    style={{ backgroundColor: "white", color: "black" }}
-                    className="button-text hover:bg-opacity-90 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
-                  >
-                    Talk to us
-                  </Button>
+                <Link
+                  href="/contacts"
+                  className="button-text inline-block rounded-md bg-white px-6 py-3 text-center font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-opacity-90 hover:shadow-lg"
+                  style={{ textDecoration: 'none' }}
+                >
+                  Talk to us
                 </Link>
               </div>
             </div>
 
             {/* Right Container - Image */}
-            <div className="hidden md:block relative h-full">
+            <div className="hidden">
               <div
                 ref={imageContainerRef}
-                className={`hero-image-container absolute right-0 w-full z-40`}
+                className={`hero-image-container absolute right-0 w-full z-10`}
                 style={{
                   height: "100vh",
                   display: "flex",
@@ -359,7 +356,7 @@ export default function Home() {
                   paddingTop: "6rem",
                 }}
               >
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full pointer-events-auto">
                   <Image
                     ref={imageRef}
                     src="/hero_image_upscaled_artistic.png"
@@ -690,8 +687,56 @@ export default function Home() {
         </ResponsiveContainer>
       </section>
 
+      {/* Blog Section - Temporarily removed for deployment */}
+      <section className="py-16 md:py-24 bg-gray-50">
+        <ResponsiveContainer>
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="section-heading">From Our Blog</h2>
+            <p className="section-description">
+              Stay updated with the latest industry news and insights from our experts.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <BlogCard
+              image="/placeholder.svg"
+              category="Finance"
+              title="Navigating the Complexities of Trade Finance in Africa"
+              excerpt="A deep dive into the challenges and opportunities in the African trade finance landscape."
+              author="John Doe"
+              date="2023-10-26"
+              slug="navigating-trade-finance"
+            />
+            <BlogCard
+              image="/placeholder.svg"
+              category="Construction"
+              title="The Role of Performance Guarantees in Large-Scale Construction"
+              excerpt="How performance guarantees can mitigate risks and ensure project success."
+              author="Jane Smith"
+              date="2023-10-24"
+              slug="performance-guarantees"
+            />
+            <BlogCard
+              image="/placeholder.svg"
+              category="Real Estate"
+              title="Investment Hotspots in East Africa's Real Estate Sector"
+              excerpt="Identifying lucrative investment opportunities in the booming East African property market."
+              author="Sam Wilson"
+              date="2023-10-22"
+              slug="investment-hotspots"
+            />
+          </div>
+          <div className="mt-12 text-center">
+            <Link href="/blog">
+              <Button size="lg" variant="outline">
+                View All Posts <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </ResponsiveContainer>
+      </section>
+
       {/* Contact Section */}
-      <section id="contact" className="py-12 xs:py-16 md:py-24 bg-gray-50">
+      <section id="contacts" className="py-12 xs:py-16 md:py-24 bg-gray-50">
         <ResponsiveContainer className="px-4 md:px-6">
           <div className="text-center mb-8 xs:mb-12">
             <h2 className="section-heading">Contact Us</h2>
@@ -704,7 +749,7 @@ export default function Home() {
             <div className="bg-white p-6 rounded-lg shadow-sm text-center">
               <MapPin className="h-8 w-8 mx-auto mb-4" style={{ color: "#FFBE00" }} />
               <h3 className="font-sans font-semibold text-lg mb-2">Address</h3>
-              <p className="contact-info">
+              <p className="contacts-info">
                 Garden Chambers Bld, Mokta-Daddah Street, Suite 301A
                 <br />
                 P.O. Box 3143-00506, Nairobi - Kenya
@@ -714,13 +759,13 @@ export default function Home() {
             <div className="bg-white p-6 rounded-lg shadow-sm text-center">
               <Phone className="h-8 w-8 mx-auto mb-4" style={{ color: "#FFBE00" }} />
               <h3 className="font-sans font-semibold text-lg mb-2">Phone</h3>
-              <p className="contact-info">0720-709711 / 0786525716</p>
+              <p className="contacts-info">0720-709711 / 0786525716</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-sm text-center">
               <Mail className="h-8 w-8 mx-auto mb-4" style={{ color: "#FFBE00" }} />
               <h3 className="font-sans font-semibold text-lg mb-2">Email</h3>
-              <p className="contact-info">info@blackbow.co.ke</p>
+              <p className="contacts-info">info@blackbow.co.ke</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-sm text-center">
@@ -742,18 +787,18 @@ export default function Home() {
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
               </svg>
               <h3 className="font-sans font-semibold text-lg mb-2">Website</h3>
-              <p className="contact-info">www.blackbow.co.ke</p>
+              <p className="contacts-info">www.blackbow.co.ke</p>
             </div>
           </div>
 
           <div className="mt-12 text-center">
-            <Link href="/contact">
+            <Link href="/contacts">
               <Button
                 size="lg"
                 style={{ backgroundColor: "#D01C1F", color: "white" }}
                 className="button-text hover:bg-opacity-90 rounded-full px-8 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
               >
-                Get in Touch <ArrowRight className="ml-2 h-4 w-4" />
+                Get In Touch <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>

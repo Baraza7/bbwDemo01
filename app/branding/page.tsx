@@ -42,9 +42,11 @@ export default function BrandingPage() {
     }))
   }
 
-  const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
-    ref.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-    setSidebarOpen(false)
+  const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth", block: "start" })
+      setSidebarOpen(false)
+    }
   }
 
   const downloadPDF = () => {
@@ -978,7 +980,7 @@ export default function BrandingPage() {
                       <span className="text-[#FFBE00] font-medium">Home</span>
                       <span className="text-white hover:text-[#FFBE00] cursor-pointer transition-colors">About</span>
                       <span className="text-white hover:text-[#FFBE00] cursor-pointer transition-colors">Services</span>
-                      <span className="text-white hover:text-[#FFBE00] cursor-pointer transition-colors">Contact</span>
+                      <span className="text-white hover:text-[#FFBE00] cursor-pointer transition-colors">Contacts</span>
                     </div>
                     <p className="text-gray-400 text-sm">Clean, minimal navigation with hover states</p>
                   </div>

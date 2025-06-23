@@ -417,32 +417,19 @@ export default function CanvasPage() {
       </section>
 
       {/* Contact CTA */}
-      <section id="contact-cta" className="py-16 md:py-20 bg-[#27272A] text-white">
+      <section id="contacts-cta" className="py-16 md:py-20 bg-[#27272A] text-white">
         <div className="container mx-auto px-4 md:px-6 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Need Personalized Assistance?</h2>
-          <p className="font-body text-gray-300 max-w-2xl mx-auto mb-8 text-lg">
-            Our experts are ready to help you with customized solutions for your specific business needs.
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Have a Unique Project in Mind?
+          </h2>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
+            Our team thrives on challenges and is ready to bring your vision to life. Let's discuss how we can tailor our services for you.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                style={{ backgroundColor: "#D01C1F", color: "white" }}
-                className="hover:bg-opacity-90 rounded-full px-8"
-              >
-                Contact Our Experts <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="/services">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 rounded-full px-8"
-              >
-                View All Services
-              </Button>
-            </Link>
-          </div>
+          <Link href="/contacts">
+            <Button size="lg" className="bg-[#FFBE00] text-black hover:bg-opacity-90">
+              Contact Our Experts <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 

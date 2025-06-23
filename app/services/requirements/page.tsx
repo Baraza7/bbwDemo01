@@ -182,7 +182,7 @@ export default function RequirementsPage() {
               <p className="font-body text-gray-700 mb-6 text-lg">
                 Need assistance with your application or have questions about the requirements?
               </p>
-              <Link href="/contact">
+              <Link href="/contacts">
                 <Button
                   size="lg"
                   style={{ backgroundColor: "#D01C1F", color: "white" }}
@@ -204,7 +204,7 @@ export default function RequirementsPage() {
             Contact us today to discuss how we can help you with your trade finance, investment, and insurance needs.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <Link href="/contact">
+            <Link href="/contacts">
               <Button
                 size="lg"
                 style={{ backgroundColor: "#D01C1F", color: "white" }}

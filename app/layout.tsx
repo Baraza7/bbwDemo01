@@ -2,9 +2,9 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Roboto, Italiana, Montserrat } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/contexts/auth-context"
 import FloatingWhatsApp from "@/components/FloatingWhatsApp"
+import { Providers } from "./providers"
 
 // Inter font configuration with full weight range
 const inter = Inter({
@@ -56,12 +56,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${roboto.variable} ${italiana.variable} ${montserrat.variable} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange={false} forcedTheme="light">
+        <Providers attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange={false} forcedTheme="light">
           <AuthProvider>
             {children}
             <FloatingWhatsApp />
           </AuthProvider>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )

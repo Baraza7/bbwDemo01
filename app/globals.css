@@ -246,7 +246,7 @@ h6 {
   color: var(--light-gray);
 }
 
-.contact-info {
+.contacts-info {
   font-family: var(--font-inter), "Inter", sans-serif !important;
   font-size: var(--small-text-size) !important;
   font-weight: 400 !important;
@@ -587,6 +587,153 @@ html, body {
 }
 
 /* Service card styles for homepage hero bottom section */
+.hero-service-card {
+  @apply h-full flex flex-col justify-center p-6 text-white transform transition-all duration-300 ease-in-out;
+}
+
+.hero-service-card .hero-service-title {
+  @apply font-serif text-2xl font-bold mb-2 transition-colors duration-300;
+  color: rgb(255, 215, 0); /* Default yellow title */
+}
+
+.hero-service-card .hero-service-description {
+  @apply hero-description text-sm transition-colors duration-300;
+}
+
+.hero-service-card .hero-service-link {
+  @apply bottom-section-link mt-3 text-sm inline-block transition-colors duration-300;
+}
+
+/* Restrict hover effect to only the 3 inner cards in #services-card-section */
+#services-card-section .hero-service-card:hover {
+  background-color: #fff !important;
+  transform: scaleY(1.05);
+}
+#services-card-section .hero-service-card:hover .hero-service-title {
+  color: #B31117 !important;
+}
+#services-card-section .hero-service-card:hover .hero-service-description,
+#services-card-section .hero-service-card:hover .hero-service-link {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+/* Remove or override the global .hero-service-card:hover so it does not affect other cards */
+.hero-service-card:hover {
+  /* No-op: override to prevent global effect */
+}
+.hero-service-card:hover .hero-service-title,
+.hero-service-card:hover .hero-service-description,
+.hero-service-card:hover .hero-service-link {
+  /* No-op: override to prevent global effect */
+}
+
+/* Retain entry animation for the section (already present via transition on #services-card-section) */
+
+/* Individual default card backgrounds */
+.hero-service-card-bg1 {
+  background-color: #D01C1F;
+}
+
+.hero-service-card-bg2 {
+  background-color: #b31217;
+}
+
+/* Styles for the new Team Section cards */
+.team-card-container {
+  perspective: 1000px;
+  width: 100%; /* Changed from 500px to 100% */
+  aspect-ratio: 1 / 1; /* Added for square responsive cards */
+  /* height: 500px; Removed fixed height */
+}
+
+.team-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.team-card-container:hover .team-card-inner {
+  transform: rotateY(180deg);
+}
+
+.team-card-front,
+.team-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  border-radius: 1rem; /* Optional: for rounded corners like the screenshot */
+  overflow: hidden; /* Ensures content respects border radius */
+}
+
+.team-card-back {
+  background-color: #000000;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex; 
+  flex-direction: column; 
+  padding: 32px; 
+  box-sizing: border-box; /* Ensure padding is included in height calculation for bio-container */
+}
+
+.bio-container {
+  height: 100%; /* Changed from 436px to 100% */
+  overflow-y: auto;
+  font-family: var(--font-montserrat); 
+  font-size: 12px;
+  font-weight: 400; /* Montserrat Regular */
+  line-height: 1.5;
+}
+
+.bio-container::-webkit-scrollbar {
+  width: 3px;
+}
+
+.bio-container::-webkit-scrollbar-track {
+  background: #FFFFFF20; /* 1px effectively due to width, but use color with alpha */
+}
+
+.bio-container::-webkit-scrollbar-thumb {
+  background: #FFD700;
+  border-radius: 3px; /* Optional: for rounded thumb */
+}
+
+/* Responsive grid for the team section */
+.team-section-grid {
+  display: block; /* Changed from grid to block, layout will be handled by component */
+  /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); Removed */
+  /* gap: 32px; Removed */
+  padding: 40px 20%; 
+  /* justify-items: center; Removed */
+  background-color: #000000; /* Added black background */
+  /* background-image: url('/team-background.jpg'); Removed */
+  /* background-size: cover; Removed */
+  /* background-position: center; Removed */
+  /* background-repeat: no-repeat; Removed */
+}
+
+/* Utility for Montserrat font if needed elsewhere, or directly apply var(--font-montserrat) */
+.font-montserrat {
+  font-family: var(--font-montserrat);
+}
+
+/* Custom styles */
+.service-card-title {
+  @apply text-lg xs:text-xl font-bold mb-1 xs:mb-2;
+}
+
+.team-member-bio {
+  @apply text-sm text-gray-600;
+}
+
+.contacts-info {
+  @apply text-sm xs:text-base text-gray-600;
+}
+
 .hero-service-card {
   @apply h-full flex flex-col justify-center p-6 text-white transform transition-all duration-300 ease-in-out;
 }

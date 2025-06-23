@@ -28,7 +28,7 @@ export default function TradeFinancePage() {
               Comprehensive trade finance solutions to support your business operations and contractual obligations.
             </p>
             {/* Using Fiery Red for CTA as specified */}
-            <Link href="#contact">
+            <Link href="#contacts">
               <Button
                 size="lg"
                 style={{ backgroundColor: "#D01C1F", color: "white" }}
@@ -287,56 +287,17 @@ export default function TradeFinancePage() {
       </section>
 
       {/* Contact CTA Section */}
-      <section id="contact" className="py-16 md:py-20 bg-[#27272A] text-white">
+      <section id="contacts" className="py-16 md:py-20 bg-[#27272A] text-white">
         <div className="container mx-auto px-4 md:px-6 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 tracking-tight">Get a Quote Today</h2>
-          <p className="font-body text-gray-300 max-w-2xl mx-auto mb-8 text-lg">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Unlock Your Business's Potential with Our Trade Finance Solutions</h2>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
             Contact us today to discuss your trade finance needs and how we can help your business succeed.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                style={{ backgroundColor: "#D01C1F", color: "white" }}
-                className="hover:bg-opacity-90 rounded-full px-8"
-              >
-                Contact Us <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="/services">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 rounded-full px-8"
-              >
-                View All Services
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
-            <div className="flex flex-col items-center">
-              <div className="h-12 w-12 rounded-full bg-[#FFBE00]/20 flex items-center justify-center mb-4">
-                <Phone className="h-6 w-6 text-[#FFBE00]" />
-              </div>
-              <h3 className="font-sans font-semibold text-lg mb-2">Call Us</h3>
-              <p className="text-gray-300">0720-709711 / 0786525716</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="h-12 w-12 rounded-full bg-[#FFBE00]/20 flex items-center justify-center mb-4">
-                <Mail className="h-6 w-6 text-[#FFBE00]" />
-              </div>
-              <h3 className="font-sans font-semibold text-lg mb-2">Email Us</h3>
-              <p className="text-gray-300">info@blackbow.co.ke</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="h-12 w-12 rounded-full bg-[#FFBE00]/20 flex items-center justify-center mb-4">
-                <MapPin className="h-6 w-6 text-[#FFBE00]" />
-              </div>
-              <h3 className="font-sans font-semibold text-lg mb-2">Visit Us</h3>
-              <p className="text-gray-300">Garden Chambers Bld, Nairobi</p>
-            </div>
-          </div>
+          <Link href="/contacts">
+            <Button size="lg" className="bg-[#FFBE00] text-black hover:bg-opacity-90">
+              Contact Us <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 

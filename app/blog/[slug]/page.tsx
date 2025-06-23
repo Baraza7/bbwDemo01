@@ -355,16 +355,18 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
                     {/* Quick Navigation */}
                     <div className="bg-gray-50 p-6 rounded-lg">
                       <h3 className="font-bold text-gray-900 mb-4">Quick Navigation</h3>
-                      <div className="space-y-2 text-sm">
-                        <Link href="/blog" className="block text-gray-600 hover:text-yellow-600 transition-colors">
-                          ← All Updates
-                        </Link>
-                        <Link href="/contact" className="block text-gray-600 hover:text-yellow-600 transition-colors">
-                          Contact Us
-                        </Link>
-                        <Link href="/about" className="block text-gray-600 hover:text-yellow-600 transition-colors">
-                          About Black Bow
-                        </Link>
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-lg text-gray-800">Quick Links</h4>
+                        <ul className="space-y-2">
+                          <li><Link href="/" className="block text-gray-600 hover:text-yellow-600 transition-colors">Home</Link></li>
+                          <li><Link href="/about" className="block text-gray-600 hover:text-yellow-600 transition-colors">About Us</Link></li>
+                          <li><Link href="/services" className="block text-gray-600 hover:text-yellow-600 transition-colors">Services</Link></li>
+                          <li>
+                            <Link href="/contacts" className="block text-gray-600 hover:text-yellow-600 transition-colors">
+                              Contact Us
+                            </Link>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>

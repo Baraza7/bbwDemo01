@@ -212,13 +212,13 @@ export default function Home2Page() {
                     Explore Our Services
                   </Button>
                 </Link>
-                <Link href="/contact">
+                <Link href="/contacts">
                   <Button
                     size={isMobile ? "sm" : "lg"}
                     variant="outline"
                     className={`w-full xs:w-auto ${theme === "dark" ? "border-white text-white hover:bg-white/10" : "border-black text-black hover:bg-black/5"} transition-colors duration-300 rounded-full px-6 py-3 xs:px-8 xs:py-4 text-base xs:text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105`}
                   >
-                    Get in Touch <ArrowRight className="ml-2 h-4 w-4 xs:h-5 xs:w-5" />
+                    Talk to an Expert <ArrowRight className="ml-2 h-4 w-4 xs:h-5 xs:w-5" />
                   </Button>
                 </Link>
               </div>
@@ -396,7 +396,7 @@ export default function Home2Page() {
                 Let's discuss how Black Bow Consult can provide the financial solutions you need to achieve your goals.
                 Contact us today for a personalized consultation.
               </p>
-              <Link href="/contact">
+              <Link href="/contacts">
                 <Button
                   size="lg"
                   className="bg-white text-black hover:bg-gray-100 transition-colors duration-300 rounded-full px-8 py-4 text-lg font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
