@@ -1,13 +1,14 @@
 "use client"
 
-import { use } from 'react'
+import { use, Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, User, Tag, ArrowLeft, Share2, Facebook, Twitter, Linkedin } from 'lucide-react'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import { BlogCard } from '@/components/BlogCard'
+import { unstable_noStore as noStore } from 'next/cache';
+import { UpdateCard } from '@/components/UpdateCard'
 import { useState, useEffect } from 'react'
 
 interface Article {
@@ -31,7 +32,7 @@ interface Article {
   seoKeywords: string
 }
 
-interface BlogConfig {
+interface UpdatesConfig {
   settings: {
     articlesPerPage: number
     showExcerpts: boolean
@@ -44,71 +45,38 @@ interface BlogConfig {
   articles: Article[]
 }
 
-export default function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+async function getUpdatesData(): Promise<UpdatesConfig | null> {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000'
+  const apiUrl = `${apiBaseUrl}/api/updates`
 
-  const [blogConfig, setBlogConfig] = useState<BlogConfig | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('/api/blog')
-        if (!response.ok) {
-          throw new Error('Failed to fetch blog data')
-        }
-        const data = await response.json()
-        setBlogConfig(data)
-      } catch (err) {
-        console.error('Error fetching blog data:', err)
-        setError('Failed to load articles.')
-      } finally {
-        setLoading(false)
-      }
+  try {
+    const res = await fetch(apiUrl)
+    if (!res.ok) {
+      throw new Error('Failed to fetch updates data')
     }
-
-    fetchData()
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="pt-20 flex items-center justify-center min-h-[50vh]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading article...</p>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    )
+    const data = await res.json()
+    return data
+  } catch (error) {
+    console.error('Failed to fetch updates data:', error)
+    return null
   }
+}
 
-  if (error || !blogConfig) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="pt-20 flex items-center justify-center min-h-[50vh]">
-          <div className="text-center">
-             <h1 className="text-2xl font-bold text-gray-900 mb-4">Error Loading Article</h1>
-            <p className="text-gray-600 mb-4">{error || "Could not load the blog configuration."}</p>
-            <Link href="/blog" className="text-blue-600 hover:underline">
-              ← Back to Updates
-            </Link>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    )
-  }
-
-  // Find the article by slug
-  const article = blogConfig.articles.find(a => a.slug === slug && a.published)
+export async function generateStaticParams() {
+  const updatesData = await getUpdatesData()
+  const articles = updatesData?.articles?.filter(p => p.published) || []
   
-  if (!article) {
+  return articles.map((article) => ({
+    slug: article.slug,
+  }))
+}
+
+export default async function UpdateArticlePage({ params }: { params: { slug: string } }) {
+  const updatesData = await getUpdatesData()
+  
+  const article = updatesData?.articles?.find((p) => p.slug === params.slug)
+  
+  if (!article || !article.published) {
     return (
       <div className="min-h-screen bg-white">
         <Header />
@@ -116,7 +84,7 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Article Not Found</h1>
             <p className="text-gray-600 mb-4">The article you're looking for doesn't exist or has been removed.</p>
-            <Link href="/blog" className="text-blue-600 hover:underline">
+            <Link href="/updates" className="text-blue-600 hover:underline">
               ← Back to Updates
             </Link>
           </div>
@@ -126,10 +94,9 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
     )
   }
 
-  // Get related articles (same category, excluding current article)
-  const relatedArticles = blogConfig.articles
-    .filter(a => a.published && a.id !== article.id && a.category === article.category)
-    .slice(0, 3)
+  const relatedArticles = updatesData?.articles
+    ?.filter((p) => p.published && p.id !== article.id && p.category === article.category)
+    ?.slice(0, 3) || []
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -178,7 +145,7 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
             <nav className="flex items-center space-x-2 text-sm">
               <Link href="/" className="text-gray-600 hover:text-yellow-600">Home</Link>
               <span className="text-gray-400">/</span>
-              <Link href="/blog" className="text-gray-600 hover:text-yellow-600">Updates</Link>
+              <Link href="/updates" className="text-gray-600 hover:text-yellow-600">Updates</Link>
               <span className="text-gray-400">/</span>
               <span className="text-gray-900 truncate max-w-sm">{article.title}</span>
             </nav>
@@ -190,7 +157,7 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
             <div className="max-w-4xl mx-auto">
               {/* Back Button */}
               <Link 
-                href="/blog" 
+                href="/updates" 
                 className="inline-flex items-center text-[#FFBE00] hover:text-yellow-400 mb-8 transition-colors font-semibold"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -210,7 +177,7 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
                     <Clock className="w-4 h-4" />
                     {article.readTime}
                   </div>
-                  {blogConfig.settings.showAuthor && (
+                  {updatesData?.settings.showAuthor && (
                     <div className="flex items-center gap-1">
                       <User className="w-4 h-4" />
                       {article.author}
@@ -382,9 +349,9 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <h2 className="text-3xl font-bold text-gray-900 mb-8">Related Articles</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-3 gap-8">
                   {relatedArticles.map((relatedArticle) => (
-                    <BlogCard
+                    <UpdateCard
                       key={relatedArticle.id}
                       image={relatedArticle.featuredImage}
                       category={relatedArticle.category}

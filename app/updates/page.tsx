@@ -7,7 +7,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { InfoCard } from "@/components/InfoCard"
 import { FileText, Megaphone } from "lucide-react"
-import { BlogCard } from "@/components/BlogCard"
+import { UpdateCard } from "@/components/UpdateCard"
 import SharedPageSections from "@/components/SharedPageSections"
 import BentoGridGallery from "@/components/BentoGridGallery"
 import InnerHero from "@/components/InnerHero"
@@ -35,7 +35,7 @@ interface Article {
   seoKeywords: string;
 }
 
-interface BlogConfig {
+interface UpdatesConfig {
   settings: {
     articlesPerPage: number;
     showExcerpts: boolean;
@@ -48,14 +48,14 @@ interface BlogConfig {
   articles: Article[];
 }
 
-async function getBlogData(): Promise<BlogConfig | null> {
+async function getUpdatesData(): Promise<UpdatesConfig | null> {
   // noStore() is a Next.js function that prevents caching of this fetch request.
   // This ensures we always get the latest blog posts from the database.
   noStore();
   
   // We need to use the absolute URL for the API endpoint when fetching from a Server Component.
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
-  const apiUrl = `${apiBaseUrl}/api/blog`;
+  const apiUrl = `${apiBaseUrl}/api/updates`;
 
   try {
     const res = await fetch(apiUrl);
@@ -69,15 +69,15 @@ async function getBlogData(): Promise<BlogConfig | null> {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error('Failed to fetch blog data:', error);
+    console.error('Failed to fetch updates data:', error);
     return null;
   }
 }
 
-export default async function BlogPage() {
-  const blogConfig = await getBlogData();
+export default async function UpdatesPage() {
+  const updatesConfig = await getUpdatesData();
 
-  if (!blogConfig || !blogConfig.articles) {
+  if (!updatesConfig || !updatesConfig.articles) {
     return (
       <div className="min-h-screen bg-white text-gray-800">
         <Header />
@@ -93,7 +93,7 @@ export default async function BlogPage() {
   }
   
   // Get published articles
-  const publishedArticles = blogConfig.articles.filter(article => article.published)
+  const publishedArticles = updatesConfig.articles.filter(article => article.published)
   
   // Get featured article
   const featuredArticle = publishedArticles.find(article => article.featured) || publishedArticles[0]
@@ -137,13 +137,13 @@ export default async function BlogPage() {
               Latest Updates from Black Bow
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Welcome to our update hub. Here, you'll find the latest news, in-depth articles, and expert analysis on the financial landscape. We are committed to providing valuable insights that help you stay ahead in the dynamic world of trade, finance, and investment.
+              Welcome to our update hub. Here, you'll find the latest news, in-depth articles, and expert analysis on the financial landscape. We are committed to providing valuable insights that you can use to stay ahead in the dynamic world of trade, finance, and investment.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Blog Grid Section */}
+      {/* Updates Grid Section */}
       <section className="py-20 bg-gray-950 text-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-4xl mx-auto mb-16">
@@ -162,7 +162,7 @@ export default async function BlogPage() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {publishedArticles.map((article) => (
-                <BlogCard 
+                <UpdateCard 
                   key={article.id}
                   image={article.featuredImage}
                   category={article.category}
